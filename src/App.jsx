@@ -1,12 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, MapPin, Instagram, Mail, Phone } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
+
+// Base path helper for Vite public assets
+const base = import.meta.env.BASE_URL;
+const getImg = (name) => `${base}${name}`.replace('//', '/');
 
 // --- Utils ---
 
@@ -204,7 +208,7 @@ const Home = () => {
             <section className="hero-section relative h-[100dvh] w-full overflow-hidden flex items-center justify-center rounded-b-[3rem] shadow-2xl z-10 mx-auto bg-charcoal">
                 <div className="absolute inset-0 bg-charcoal/40 z-10"></div>
                 <img 
-                    src="/hero.jpg" 
+                    src={getImg("hero.jpg")} 
                     alt="Jambo Kella House Rome" 
                     className="hero-image absolute inset-0 w-full h-full object-cover z-0 opacity-80"
                 />
@@ -290,7 +294,7 @@ const Home = () => {
                         <div className="reveal-up group cursor-pointer mt-0 lg:mt-16">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6">
                                 <img 
-                                    src="/room1.jpg" 
+                                    src={getImg("room1.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     alt="Camera Padronale" 
                                 />
@@ -303,7 +307,7 @@ const Home = () => {
                         <div className="reveal-up group cursor-pointer mt-0 lg:mt-8">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6">
                                 <img 
-                                    src="/room2.jpg" 
+                                    src={getImg("room2.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     alt="Camera Matrimoniale" 
                                 />
@@ -316,7 +320,7 @@ const Home = () => {
                         <div className="reveal-up group cursor-pointer mb-0">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6">
                                 <img 
-                                    src="/room3.jpg" 
+                                    src={getImg("room3.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
                                     alt="Terza Camera" 
                                 />
@@ -351,7 +355,7 @@ const Home = () => {
                     </div>
                     <div className="md:w-1/2 w-full h-[500px] relative overflow-hidden group">
                         <img 
-                            src="/location.jpg" 
+                            src={getImg("location.jpg")} 
                             alt="Roma" 
                             className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000"
                         />
@@ -381,9 +385,9 @@ const CamerePage = () => {
     }, []);
 
     const rooms = [
-        { name: 'Camera Padronale', desc: 'Ampia e luminosa, arredata con gusto ed eleganza classica.', img: '/room1.jpg' },
-        { name: 'Seconda Camera', desc: 'Accogliente e spaziosa, perfetta per chi cerca riservatezza e relax.', img: '/room2.jpg' },
-        { name: 'Terza Camera', desc: 'Atmosfera intima, comfort essenziale e curata nei dettagli.', img: '/room3.jpg' }
+        { name: 'Camera Padronale', desc: 'Ampia e luminosa, arredata con gusto ed eleganza classica.', img: getImg('room1.jpg') },
+        { name: 'Seconda Camera', desc: 'Accogliente e spaziosa, perfetta per chi cerca riservatezza e relax.', img: getImg('room2.jpg') },
+        { name: 'Terza Camera', desc: 'Atmosfera intima, comfort essenziale e curata nei dettagli.', img: getImg('room3.jpg') }
     ];
 
     return (
@@ -436,7 +440,7 @@ const LocationPage = () => {
                 <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block text-center">La Posizione</span>
                 <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-12 text-center text-balance">Al centro della Storia.</h1>
                 <div className="overflow-hidden h-[400px] mb-12 shadow-2xl relative group">
-                    <img src="/location.jpg" alt="Mappa Roma" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-center" />
+                    <img src={getImg("location.jpg")} alt="Mappa Roma" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-center" />
                     <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center">
                          <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="px-8 py-3 bg-white/90 text-charcoal uppercase tracking-widest text-sm font-bold hover:bg-gold hover:text-white transition-colors">Apri su Google Maps</a>
                     </div>
