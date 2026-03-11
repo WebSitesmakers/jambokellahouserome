@@ -46,7 +46,7 @@ const Navbar = () => {
             <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-cream/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
                 <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
                     <Link to="/" className="z-50 font-serif text-3xl font-bold tracking-widest uppercase text-charcoal">
-                        Jambo Kella
+                        Jambokella
                     </Link>
 
                     {/* Desktop Menu */}
