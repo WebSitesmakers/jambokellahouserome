@@ -94,7 +94,7 @@ const Footer = () => {
                     
                     {/* Brand */}
                     <div className="flex flex-col items-center md:items-start">
-                        <h3 className="font-serif text-3xl mb-6 tracking-widest uppercase text-gold">Jambo Kella</h3>
+                        <h3 className="font-serif text-3xl mb-6 tracking-widest uppercase text-gold">Jambokella</h3>
                         <p className="text-cream/60 font-sans font-light max-w-sm leading-relaxed mb-6">
                             L'eleganza dell'ospitalità romana.<br/>
                             Un rifugio esclusivo nel cuore della Città Eterna, dove storia e comfort contemporaneo si fondono.
@@ -138,7 +138,7 @@ const Footer = () => {
                 </div>
 
                 <div className="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-center text-xs font-sans text-cream/40 px-4">
-                    <p>© {new Date().getFullYear()} Jambo Kella House Rome. Tutti i diritti riservati.</p>
+                    <p>© {new Date().getFullYear()} Jambokella House Rome. Tutti i diritti riservati.</p>
                     <div className="flex gap-6 mt-4 md:mt-0">
                         <a href="#" className="hover:text-cream transition-colors">Privacy Policy</a>
                         <a href="#" className="hover:text-cream transition-colors">Cookie Policy</a>
@@ -200,12 +200,12 @@ const Home = () => {
     return (
         <main ref={mainRef}>
             <Helmet>
-                <title>Jambo Kella House Rome | La tua dimora a Roma</title>
+                <title>Jambokella House Rome | La tua dimora a Roma</title>
                 <meta name="description" content="Jambo Kella House: l'eleganza dell'ospitalità romana. Un B&B esclusivo nel cuore di Roma." />
             </Helmet>
 
             {/* HERO SECTION */}
-            <section className="hero-section relative h-[100dvh] w-full overflow-hidden flex items-center justify-center rounded-b-[3rem] shadow-2xl z-10 mx-auto bg-charcoal">
+            <section className="hero-section relative h-[100dvh] w-full overflow-hidden flex items-center justify-center rounded-b-[3rem] shadow-2xl z-10 mx-auto bg-charcoal pt-32 pb-16 md:p-0">
                 <div className="absolute inset-0 bg-charcoal/40 z-10"></div>
                 <img 
                     src={getImg("hero.jpg")} 
@@ -213,16 +213,16 @@ const Home = () => {
                     className="hero-image absolute inset-0 w-full h-full object-cover z-0 opacity-80"
                 />
                 
-                <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center">
-                    <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-8 block drop-shadow-md">
+                <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
+                    <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-4 md:mb-8 block drop-shadow-md">
                         Bed & Breakfast Roma
                     </span>
-                    <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-8 drop-shadow-2xl leading-tight">
-                        <span className="block">Jambo Kella</span>
-                        <span className="block italic font-light text-4xl md:text-6xl text-gold mt-2">La tua dimora a Roma.</span>
+                    <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 md:mb-8 drop-shadow-2xl leading-tight">
+                        <span className="block">Jambokella</span>
+                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">La tua dimora a Roma.</span>
                     </h1>
                     
-                    <Link to="/prenota" className="hero-subtitle mt-8 px-10 py-4 bg-gold text-charcoal font-sans text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl">
+                    <Link to="/prenota" className="hero-subtitle mt-6 md:mt-8 px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl">
                         Prenota il tuo soggiorno
                     </Link>
                 </div>
@@ -238,7 +238,7 @@ const Home = () => {
                     </h2>
                     
                     <p className="reveal-up text-lg md:text-xl font-sans font-light text-charcoal/70 max-w-3xl mx-auto leading-relaxed mb-16">
-                        Situata nel cuore pulsante di Roma, Jambo Kella House è il perfetto equilibrio tra eleganza e calore domestico. 
+                        Situata nel cuore pulsante di Roma, Jambokella House è il perfetto equilibrio tra eleganza e calore domestico. 
                         Camere dal design classico-contemporaneo, cura nei dettagli e un'ospitalità autentica ti faranno sentire cittadino romano dal primo istante.
                     </p>
 
@@ -393,14 +393,14 @@ const CamerePage = () => {
     return (
         <main ref={mainRef} className="pt-32 pb-24 bg-cream min-h-screen">
             <Helmet>
-                <title>L'Appartamento | Jambo Kella House Rome</title>
+                <title>L'Appartamento | Jambokella House Rome</title>
                 <meta name="description" content="Scopri l'intero appartamento. Tre comode camere matrimoniali dotate di ogni comfort." />
             </Helmet>
             <div className="container mx-auto px-6 lg:px-12">
                 <div className="max-w-3xl mx-auto text-center mb-16">
                     <h1 className="page-title text-5xl md:text-6xl font-serif text-charcoal mb-6">L'Appartamento</h1>
                     <p className="page-title font-sans font-light text-charcoal/70 text-lg leading-relaxed">
-                        Jambo Kella House è un appartamento spazioso e finemente arredato, messo interamente a tua disposizione. 
+                        Jambokella House è un appartamento spazioso e finemente arredato, messo interamente a tua disposizione. 
                         Comprende tre ampie camere matrimoniali ideali per famiglie o piccoli gruppi che desiderano vivere la capitale come dei veri romani.
                     </p>
                 </div>
@@ -433,7 +433,7 @@ const LocationPage = () => {
     return (
         <main ref={mainRef} className="pt-32 pb-24 bg-cream min-h-screen">
             <Helmet>
-                <title>Dove Siamo | Jambo Kella House Rome</title>
+                <title>Dove Siamo | Jambokella House Rome</title>
                 <meta name="description" content="Siamo nel centro di Roma. Scopri come raggiungerci e vivi la vera atmosfera romana." />
             </Helmet>
             <div className="container mx-auto px-6 lg:px-12 page-content max-w-4xl mx-auto">
