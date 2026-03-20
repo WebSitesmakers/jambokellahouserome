@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Lenis from 'lenis';
 import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { HelmetProvider, Helmet } from 'react-helmet-async';
@@ -153,6 +153,33 @@ const Footer = () => {
 
 const Home = () => {
     const mainRef = useRef(null);
+    const videoRef = useRef(null);
+    const [videoSrc, setVideoSrc] = useState("");
+
+    // Detect screen size and set appropriate video source
+    useEffect(() => {
+        const checkMobile = () => {
+            const isMobile = window.innerWidth < 769;
+            setVideoSrc(getImg(isMobile ? "hero-video-mobile.mp4" : "hero-video.mp4"));
+        };
+        
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Force play on source change
+    useEffect(() => {
+        if (videoRef.current && videoSrc) {
+            videoRef.current.load(); // Reload sources
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay prevented:", error);
+                });
+            }
+        }
+    }, [videoSrc]);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -186,7 +213,7 @@ const Home = () => {
                 });
             });
 
-            gsap.to(".hero-image", {
+            gsap.to(".hero-image-container", {
                 scrollTrigger: {
                     trigger: ".hero-section",
                     start: "top top",
@@ -197,9 +224,33 @@ const Home = () => {
                 scale: 1.1,
                 ease: "none"
             });
-            gsap.from(".reveal-up", {
+            gsap.from(".philosophy-section .reveal-up", {
                 scrollTrigger: {
                     trigger: ".philosophy-section",
+                    start: "top 80%",
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                stagger: 0.2
+            });
+
+            gsap.from(".rooms-preview .reveal-up", {
+                scrollTrigger: {
+                    trigger: ".rooms-preview",
+                    start: "top 70%",
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power2.out",
+                stagger: 0.2
+            });
+
+            gsap.from(".location-teaser .reveal-up", {
+                scrollTrigger: {
+                    trigger: ".location-teaser",
                     start: "top 80%",
                 },
                 y: 60,
@@ -262,17 +313,18 @@ const Home = () => {
             {/* HERO SECTION */}
             <section className="hero-section relative h-[100dvh] w-full overflow-hidden flex items-center justify-center rounded-b-[3rem] shadow-2xl z-10 mx-auto bg-charcoal pt-32 pb-16 md:p-0">
                 <div className="absolute inset-0 bg-charcoal/40 z-10"></div>
-                <video 
-                    autoPlay 
-                    muted 
-                    loop 
-                    playsInline 
-                    poster={getImg("hero.jpg")}
-                    className="hero-image absolute inset-0 w-full h-full object-cover z-0 opacity-80"
-                >
-                    <source src={getImg("hero-video.mp4")} type="video/mp4" media="(min-width: 769px)" />
-                    <source src={getImg("hero-video-mobile.mp4")} type="video/mp4" />
-                </video>
+                <div className="hero-image-container absolute inset-0 w-full h-full z-0 opacity-80">
+                    <video 
+                        ref={videoRef}
+                        muted 
+                        loop 
+                        playsInline 
+                        poster={getImg("hero.jpg")}
+                        className="w-full h-full object-cover"
+                    >
+                        {videoSrc && <source src={videoSrc} type="video/mp4" />}
+                    </video>
+                </div>
                 
                 <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
                     <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-4 md:mb-8 block drop-shadow-md">
@@ -366,7 +418,7 @@ const Home = () => {
 
                     <div className="grid md:grid-cols-3 gap-8 md:gap-12">
                         {/* Room 1 */}
-                        <div className="room-card-preview reveal-up group cursor-pointer lg:mt-16">
+                        <div className="room-card-preview group cursor-pointer lg:mt-16">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
                                     src={getImg("room1.jpg")} 
@@ -379,7 +431,7 @@ const Home = () => {
                         </div>
 
                         {/* Room 2 */}
-                        <div className="room-card-preview reveal-up group cursor-pointer lg:mt-8">
+                        <div className="room-card-preview group cursor-pointer lg:mt-8">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
                                     src={getImg("room2.jpg")} 
@@ -392,7 +444,7 @@ const Home = () => {
                         </div>
 
                         {/* Room 3 */}
-                        <div className="room-card-preview reveal-up group cursor-pointer">
+                        <div className="room-card-preview group cursor-pointer">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
                                     src={getImg("EMP_8295.jpg")} 
