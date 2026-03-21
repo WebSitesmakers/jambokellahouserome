@@ -326,7 +326,6 @@ const Home = () => {
                         playsInline 
                         disablePictureInPicture
                         controlsList="nopictureinpicture"
-                        poster={getImg("hero.jpg")}
                         className="w-full h-full object-cover"
                     >
                         {videoSrc && <source src={videoSrc} type="video/mp4" />}
