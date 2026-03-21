@@ -154,16 +154,20 @@ const Footer = () => {
 const Home = () => {
     const mainRef = useRef(null);
     const videoRef = useRef(null);
-    const [videoSrc, setVideoSrc] = useState("");
 
-    // Detect screen size and set appropriate video source
+    // Initial setting on first render
+    const [videoSrc, setVideoSrc] = useState(() => {
+        const isMobile = window.innerWidth < 769;
+        return getImg(isMobile ? "hero-video-mobile.mp4" : "hero-video.mp4");
+    });
+
+    // Detect screen size on resize
     useEffect(() => {
         const checkMobile = () => {
             const isMobile = window.innerWidth < 769;
             setVideoSrc(getImg(isMobile ? "hero-video-mobile.mp4" : "hero-video.mp4"));
         };
         
-        checkMobile();
         window.addEventListener('resize', checkMobile);
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
@@ -316,6 +320,7 @@ const Home = () => {
                 <div className="hero-image-container absolute inset-0 w-full h-full z-0 opacity-80">
                     <video 
                         ref={videoRef}
+                        autoPlay
                         muted 
                         loop 
                         playsInline 
