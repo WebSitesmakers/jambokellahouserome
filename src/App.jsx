@@ -319,6 +319,8 @@ const Home = () => {
                         muted 
                         loop 
                         playsInline 
+                        disablePictureInPicture
+                        controlsList="nopictureinpicture"
                         poster={getImg("hero.jpg")}
                         className="w-full h-full object-cover"
                     >
