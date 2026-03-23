@@ -331,19 +331,23 @@ const Home = () => {
                         {videoSrc && <source src={videoSrc} type="video/mp4" />}
                     </video>
                 </div>
-                
-                <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
+                             <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
                     <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-4 md:mb-8 block drop-shadow-md">
-                        Benvenuti a Trastevere
+                        Riposo autentico nel cuore di Roma
                     </span>
                     <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 md:mb-8 drop-shadow-2xl leading-tight">
                         <span className="block">Jambokella</span>
-                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">Sentirsi a casa, a Roma.</span>
+                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">La vostra oasi di pace a Trastevere.</span>
                     </h1>
                     
-                    <Link to="/prenota" className="btn-magnetic hero-subtitle mt-6 md:mt-8 px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl">
-                        Verifica disponibilità
-                    </Link>
+                    <div className="mt-4 md:mt-8 flex flex-col items-center gap-3">
+                        <Link to="/prenota" className="btn-magnetic hero-subtitle px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl">
+                            Trova le tue date al miglior prezzo
+                        </Link>
+                        <p className="hero-subtitle text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
+                            Prenotazione diretta senza commissioni • Cancellazione flessibile
+                        </p>
+                    </div>
                 </div>
             </section>
 
@@ -374,31 +378,31 @@ const Home = () => {
                                 <span className="reveal-up font-sans tracking-widest uppercase text-gold text-sm font-bold mb-6 block">Il Nostro Approccio</span>
                                 <h2 className="reveal-up text-4xl md:text-5xl lg:text-7xl font-serif leading-tight mb-8">
                                     Più che un bed & breakfast,<br/>
-                                    <span className="text-gold">un luogo pensato per farvi stare bene.</span>
+                                    <span className="text-gold">la vostra ricarica quotidiana.</span>
                                 </h2>
                             </div>
                             
-                            <div className="reveal-up space-y-8 max-w-xl">
+                            <div className="reveal-up space-y-6 max-w-xl">
                                 <p className="text-lg md:text-xl font-sans font-light text-charcoal/80 leading-relaxed italic border-l-2 border-gold pl-8 py-4">
-                                    "Abbiamo curato Jambokella House pensando a come vorremmo essere accolti noi in viaggio. Nessun lusso ostentato, ma la vera attenzione per le cose che contano davvero."
+                                    "Roma è magnifica, ma esplorarla tutto il giorno richiede energie. Abbiamo trasformato Jambokella House in un rifugio di quiete assoluta."
                                 </p>
                                 <p className="text-base md:text-lg font-sans font-light text-charcoal/60 leading-relaxed">
-                                    La pulizia impeccabile, il profumo di bucato, un letto in cui sprofondare comodamente dopo una lunga giornata di cammino per la città, e la nostra disponibilità sincera nell'aiutarvi a scoprire i segreti della Roma che amiamo.
+                                    Materassi di alta fascia per dormire profondamente, pulizia impeccabile che profuma di casa, e spazi dove il frastuono della città resta chiuso fuori dalla porta. Vi garantiamo il riposo di cui avete bisogno per vivere la bellezza di Roma al cento per cento.
                                 </p>
                             </div>
 
                             <div className="reveal-up pt-8 flex flex-wrap gap-8">
                                 <div className="flex flex-col gap-2">
                                     <span className="font-serif text-3xl text-gold">01</span>
-                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Spazi pensati per il riposo</span>
+                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Sonni tranquilli garantiti</span>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <span className="font-serif text-3xl text-gold">02</span>
-                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Nel quartiere più vero</span>
+                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Posizione strategica (No auto)</span>
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <span className="font-serif text-3xl text-gold">03</span>
-                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Ospitalità discreta</span>
+                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Host autentici, consigli veri</span>
                                 </div>
                             </div>
                         </div>
@@ -413,15 +417,15 @@ const Home = () => {
                         <div className="max-w-xl">
                             <span className="reveal-up font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">L'Appartamento</span>
                             <h2 className="reveal-up text-4xl md:text-5xl font-serif leading-tight">
-                                Tre camere, zero pensieri. Il rifugio perfetto al rientro dalle <span className="italic text-gold">vostre esplorazioni.</span>
+                                Tre camere, zero pensieri. Spazi indipendenti dove ricaricare davvero le energie prima della prossima <span className="italic text-gold">passeggiata romana.</span>
                             </h2>
                         </div>
                         <Link to="/camere" className="reveal-up hidden md:inline-block border-b border-charcoal pb-1 uppercase font-sans tracking-widest text-sm hover:text-gold hover:border-gold transition-colors">
-                            Scopri l'intero appartamento
+                            Vedi gli spazi
                         </Link>
                     </div>
 
-                    <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+                    <div className="reveal-up grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
                         {/* Room 1 */}
                         <div className="room-card-preview group cursor-pointer lg:mt-16">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
@@ -432,7 +436,7 @@ const Home = () => {
                                 />
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Padronale</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Spaziosa e rassicurante, per un riposo profondo.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm">Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.</p>
                         </div>
 
                         {/* Room 2 */}
@@ -445,7 +449,7 @@ const Home = () => {
                                 />
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Seconda Camera</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Luce naturale e un'atmosfera incredibilmente rilassante.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm">Luce naturale bellissima, spazio per le valigie e un'acustica che vi garantirà risvegli dolci.</p>
                         </div>
 
                         {/* Room 3 */}
@@ -458,7 +462,7 @@ const Home = () => {
                                 />
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Terza Camera</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Intima, silenziosa e curata in ogni singolo dettaglio.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm">Compatta ma geniale. Intimità totale e una scrivania per ritagliarsi un momento di pace.</p>
                         </div>
                     </div>
 
@@ -476,10 +480,10 @@ const Home = () => {
                     <div className="md:w-1/2">
                         <span className="reveal-up font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">La Zona</span>
                         <h2 className="reveal-up text-4xl md:text-5xl lg:text-6xl font-serif leading-tight mb-8">
-                            A due passi da tutto, <span className="italic text-gold">lontani dal caos.</span>
+                            A 15 minuti da tutto, <span className="italic text-gold">a chilometri dal caos.</span>
                         </h2>
                         <p className="reveal-up font-sans font-light text-cream/70 text-lg leading-relaxed mb-10 max-w-lg">
-                            Siamo in un punto privilegiato di Roma: a breve distanza a piedi dai luoghi simbolo della città, ma nella quiete necessaria per dormire sonni tranquilli, senza essere disturbati dalla movida.
+                            Sarete nel quartiere più vero di Roma, Trastevere. Abbastanza centrali da poter uscire a piedi la mattina ed essere subito tra i monumenti, ma in una via che vi protegge dalla movida notturna. Addormentarvi nel silenzio, svegliarvi nel cuore della storia.
                         </p>
                         <Link to="/location" className="btn-magnetic reveal-up inline-flex items-center gap-3 border border-gold px-8 py-3 text-gold hover:bg-gold hover:text-charcoal transition-colors tracking-widest uppercase font-sans text-xs font-bold">
                             Esplora la mappa
@@ -517,9 +521,9 @@ const CamerePage = () => {
     }, []);
 
     const rooms = [
-        { name: 'Camera Padronale', desc: 'Spaziosa e rassicurante, rifinita con dettagli eleganti per favorire un riposo profondo.', img: getImg('room1.jpg') },
-        { name: 'Seconda Camera', desc: 'Luce naturale e un\'atmosfera incredibilmente rilassante, ideale per staccare la spina.', img: getImg('room2.jpg') },
-        { name: 'Terza Camera', desc: 'Intima, silenziosa e raccolta. Curata in ogni singolo dettaglio per garantirvi serenità.', img: getImg('EMP_8295.jpg') }
+        { name: 'Camera Padronale', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg') },
+        { name: 'Seconda Camera', desc: 'Luce naturale bellissima, spazio per le valigie e un\'acustica che vi garantirà risvegli dolci.', img: getImg('room2.jpg') },
+        { name: 'Terza Camera', desc: 'Compatta ma geniale. Intimità totale e una scrivania per ritagliarsi un momento di pace.', img: getImg('EMP_8295.jpg') }
     ];
 
     return (
@@ -532,7 +536,7 @@ const CamerePage = () => {
                 <div className="max-w-3xl mx-auto text-center mb-16">
                     <h1 className="page-title text-5xl md:text-6xl font-serif text-charcoal mb-6">L'Appartamento</h1>
                     <p className="page-title font-sans font-light text-charcoal/70 text-lg leading-relaxed">
-                        Jambokella è la casa che vi aspetta al ritorno dalle vostre passeggiate romane. Tre camere matrimoniali (affittabili anche singolarmente) pensate per offrirvi indipendenza, pulizia impeccabile e il riposo che vi meritate.
+                        Prenotate l'intero appartamento per la vostra famiglia o una singola camera. In entrambi i casi, le chiavi vi apriranno le porte di spazi indipendenti, luminosi e pensati per eliminare ogni stress logistico. Godetevi Roma, al comfort ci pensiamo noi.
                     </p>
                 </div>
                 <div className="rooms-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -574,21 +578,21 @@ const EsperienzePage = () => {
 
     const experiences = [
         {
-            title: "Mangiare bene",
+            title: "Mangiare come noi",
             category: "Gastronomia",
-            desc: "Vi consiglieremo dove preparano la vera carbonara e dove la pizza è croccante al punto giusto, aiutandovi a evitare le trappole per turisti.",
+            desc: "Vi indicheremo le trattorie nascoste dove mangiano i romani. Carbonara vera, zero fila, menù senza foto per turisti.",
             img: getImg("experience-food.jpg")
         },
         {
-            title: "Passeggiate serali",
+            title: "Le passeggiate giuste",
             category: "Panorami",
-            desc: "Vi racconteremo quali strade prendere per vedere Roma illuminata, quando il traffico diminuisce e la città tira un sospiro di sollievo.",
+            desc: "Itinerari serali fuori rotta per vedere la città illuminata quando le piazze principali si svuotano.",
             img: getImg("experience-views.jpg")
         },
         {
-            title: "Angoli nascosti",
+            title: "Arte senza stress",
             category: "Cultura",
-            desc: "Oltre il Colosseo. Musei più intimi, piazze secondarie e chiese che custodiscono capolavori senza prevedere file chilometriche.",
+            desc: "Musei e chiese gratuiti che custodiscono capolavori immensi, sconosciuti al turismo di massa.",
             img: getImg("experience-culture.jpg")
         }
     ];
@@ -602,7 +606,7 @@ const EsperienzePage = () => {
             <div className="container mx-auto px-6 lg:px-12 page-content max-w-6xl">
                 <div className="text-center mb-24 max-w-3xl mx-auto">
                     <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Vivere Roma</span>
-                    <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-8">I nostri consigli personali.</h1>
+                    <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-8">Godetevi Roma, senza cadere nelle trappole per turisti.</h1>
                     <p className="font-sans font-light text-charcoal/70 text-lg leading-relaxed">
                         Viviamo questa città da sempre e ci fa piacere condividere con voi i nostri posti del cuore. Dalla trattoria sincera dove andiamo la domenica, ai panorami che non stancano mai. Chiedeteci pure.
                     </p>
@@ -633,7 +637,7 @@ const EsperienzePage = () => {
 
                 <div className="mt-40 text-center bg-charcoal rounded-[3rem] p-16 md:p-24 text-cream relative overflow-hidden">
                     <div className="relative z-10 space-y-8">
-                        <h2 className="text-4xl md:text-5xl font-serif">Siamo felici di aiutarvi</h2>
+                        <h2 className="text-4xl md:text-5xl font-serif">Chiedeteci il vostro piano perfetto</h2>
                         <p className="font-sans font-light text-cream/70 text-lg max-w-2xl mx-auto">
                             Viviamo Roma ogni giorno e conosciamo bene i luoghi da non perdere (e quelli da evitare). Scriveteci per qualsiasi suggerimento su come organizzare le vostre giornate.
                         </p>
