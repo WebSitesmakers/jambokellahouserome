@@ -331,20 +331,20 @@ const Home = () => {
                         {videoSrc && <source src={videoSrc} type="video/mp4" />}
                     </video>
                 </div>
-                             <div className="relative z-20 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
+                <div className="relative z-30 text-center text-cream px-6 max-w-4xl mx-auto flex flex-col items-center mt-12 md:mt-0">
                     <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-4 md:mb-8 block drop-shadow-md">
                         Riposo autentico nel cuore di Roma
                     </span>
-                    <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 md:mb-8 drop-shadow-2xl leading-tight">
+                    <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 md:mb-8 drop-shadow-2xl leading-tight text-white">
                         <span className="block">Jambokella</span>
-                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">La vostra oasi di pace a Trastevere.</span>
+                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">La vostra oasi di pace a Monteverde.</span>
                     </h1>
                     
-                    <div className="mt-4 md:mt-8 flex flex-col items-center gap-3">
-                        <Link to="/prenota" className="btn-magnetic hero-subtitle px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl">
+                    <div className="reveal-up mt-4 md:mt-8 flex flex-col items-center gap-3">
+                        <Link to="/prenota" className="btn-magnetic px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
                             Trova le tue date al miglior prezzo
                         </Link>
-                        <p className="hero-subtitle text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
+                        <p className="text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
                             Prenotazione diretta senza commissioni • Cancellazione flessibile
                         </p>
                     </div>
@@ -483,7 +483,7 @@ const Home = () => {
                             A 15 minuti da tutto, <span className="italic text-gold">a chilometri dal caos.</span>
                         </h2>
                         <p className="reveal-up font-sans font-light text-cream/70 text-lg leading-relaxed mb-10 max-w-lg">
-                            Sarete nel quartiere più vero di Roma, Trastevere. Abbastanza centrali da poter uscire a piedi la mattina ed essere subito tra i monumenti, ma in una via che vi protegge dalla movida notturna. Addormentarvi nel silenzio, svegliarvi nel cuore della storia.
+                            Sarete nel quartiere più vero di Roma, Monteverde. Abbastanza centrali da poter uscire a piedi la mattina ed essere subito tra i monumenti, ma in una via che vi protegge dalla movida notturna. Addormentarvi nel silenzio, svegliarvi nel cuore della storia.
                         </p>
                         <Link to="/location" className="btn-magnetic reveal-up inline-flex items-center gap-3 border border-gold px-8 py-3 text-gold hover:bg-gold hover:text-charcoal transition-colors tracking-widest uppercase font-sans text-xs font-bold">
                             Esplora la mappa
@@ -685,8 +685,8 @@ const LocationPage = () => {
                     </div>
                     <div>
                         <h3 className="font-serif text-2xl mb-4 text-charcoal">Come Raggiungerci</h3>
-                        <p className="leading-relaxed mb-4"><strong>In Treno:</strong> Dalla Stazione Trastevere è facilmente raggiungibile con i tram 8 o 3 o il bus H.</p>
-                        <p className="leading-relaxed"><strong>In Aereo:</strong> Dall'aeroporto di Fiumicino, il treno diretto ferma a Trastevere in soli 26 minuti.</p>
+                        <p className="leading-relaxed mb-4"><strong>In Treno:</strong> Dalla Stazione Trastevere il nostro B&B a Monteverde è facilmente raggiungibile con i tram 8 o 3 o il bus H.</p>
+                        <p className="leading-relaxed"><strong>In Aereo:</strong> Dall'aeroporto di Fiumicino, il treno diretto ferma alla Stazione Trastevere (porta di Monteverde) in soli 26 minuti.</p>
                     </div>
                 </div>
             </div>
