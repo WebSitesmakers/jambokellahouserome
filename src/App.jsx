@@ -14,10 +14,16 @@ const getImg = (name) => `${base}${name}`.replace('//', '/');
 
 // --- Utils ---
 
+let lenisInstance = null;
+
 const ScrollToTop = () => {
     const { pathname } = useLocation();
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if (lenisInstance) {
+            lenisInstance.scrollTo(0, { immediate: true });
+        } else {
+            window.scrollTo(0, 0);
+        }
     }, [pathname]);
     return null;
 };
@@ -699,36 +705,30 @@ const LocationPage = () => {
 const App = () => {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.2,
+            duration: 1.1,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false,
-            touchMultiplier: 2,
-            infinite: false,
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 1.5,
+            lerp: 0.1,
         });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
-
-        requestAnimationFrame(raf);
+        lenisInstance = lenis;
 
         // Connect Lenis to ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
 
-        gsap.ticker.add((time) => {
+        const updateLenis = (time) => {
             lenis.raf(time * 1000);
-        });
+        };
 
+        gsap.ticker.add(updateLenis);
         gsap.ticker.lagSmoothing(0);
 
         return () => {
             lenis.destroy();
-            gsap.ticker.remove(gsap.ticker.add);
+            gsap.ticker.remove(updateLenis);
+            lenisInstance = null;
         };
     }, []);
 
