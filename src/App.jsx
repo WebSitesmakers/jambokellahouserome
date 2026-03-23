@@ -111,7 +111,7 @@ const Footer = () => {
                     <div className="flex flex-col items-center md:items-start font-sans font-light text-cream/80">
                         <h4 className="font-serif text-xl mb-6 uppercase tracking-widest text-gold text-sm">Contatti</h4>
                         <div className="space-y-4">
-                            <a href="https://maps.google.com/?q=Via+N.Corsi,+4,+Roma" target="_blank" rel="noreferrer" className="flex items-start gap-3 hover:text-gold transition-colors group">
+                            <a href="https://maps.app.goo.gl/Vd8wodjyoFZS9FF28" target="_blank" rel="noreferrer" className="flex items-start gap-3 hover:text-gold transition-colors group">
                                 <MapPin className="w-5 h-5 text-gold shrink-0 mt-1" />
                                 <span>Via N. Corsi, 4<br/>00152 Roma RM, Italia</span>
                             </a>
@@ -681,7 +681,7 @@ const LocationPage = () => {
                 <div className="overflow-hidden h-[400px] mb-12 shadow-2xl relative group">
                     <img src={getImg("location.jpg")} alt="Mappa Roma" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-center" />
                     <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center">
-                         <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="px-8 py-3 bg-white/90 text-charcoal uppercase tracking-widest text-sm font-bold hover:bg-gold hover:text-white transition-colors">Apri su Google Maps</a>
+                         <a href="https://maps.app.goo.gl/Vd8wodjyoFZS9FF28" target="_blank" rel="noreferrer" className="px-8 py-3 bg-white/90 text-charcoal uppercase tracking-widest text-sm font-bold hover:bg-gold hover:text-white transition-colors">Apri su Google Maps</a>
                     </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-12 font-sans font-light text-charcoal/80">
