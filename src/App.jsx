@@ -393,7 +393,7 @@ const Home = () => {
                                     "Roma è magnifica, ma esplorarla tutto il giorno richiede energie. Abbiamo trasformato Jambokella House in un rifugio di quiete assoluta."
                                 </p>
                                 <p className="text-base md:text-lg font-sans font-light text-charcoal/60 leading-relaxed">
-                                    Materassi di alta fascia per dormire profondamente, pulizia impeccabile che profuma di casa, e spazi dove il frastuono della città resta chiuso fuori dalla porta. Vi garantiamo il riposo di cui avete bisogno per vivere la bellezza di Roma al cento per cento.
+                                    Materassi comodi per dormire profondamente, pulizia impeccabile e spazi dove il frastuono della città resta chiuso fuori dalla porta. Vi garantiamo il riposo di cui avete bisogno per vivere la bellezza di Roma al cento per cento.
                                 </p>
                             </div>
 
@@ -408,7 +408,7 @@ const Home = () => {
                                 </div>
                                 <div className="flex flex-col gap-2">
                                     <span className="font-serif text-3xl text-gold">03</span>
-                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Host autentici, consigli veri</span>
+                                    <span className="font-sans uppercase tracking-[0.2em] text-[10px] font-bold">Host professionali</span>
                                 </div>
                             </div>
                         </div>
@@ -455,7 +455,7 @@ const Home = () => {
                                 />
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Seconda Camera</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Luce naturale bellissima, spazio per le valigie e un'acustica che vi garantirà risvegli dolci.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm">Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.</p>
                         </div>
 
                         {/* Room 3 */}
@@ -468,7 +468,7 @@ const Home = () => {
                                 />
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Terza Camera</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Compatta ma geniale. Intimità totale e una scrivania per ritagliarsi un momento di pace.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm">Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.</p>
                         </div>
                     </div>
 
@@ -528,8 +528,8 @@ const CamerePage = () => {
 
     const rooms = [
         { name: 'Camera Padronale', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg') },
-        { name: 'Seconda Camera', desc: 'Luce naturale bellissima, spazio per le valigie e un\'acustica che vi garantirà risvegli dolci.', img: getImg('room2.jpg') },
-        { name: 'Terza Camera', desc: 'Compatta ma geniale. Intimità totale e una scrivania per ritagliarsi un momento di pace.', img: getImg('EMP_8295.jpg') }
+        { name: 'Seconda Camera', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg') },
+        { name: 'Terza Camera', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8295.jpg') }
     ];
 
     return (
@@ -705,12 +705,12 @@ const LocationPage = () => {
 const App = () => {
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.1,
+            duration: 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
-            wheelMultiplier: 1,
+            wheelMultiplier: 1.2,
             touchMultiplier: 1.5,
-            lerp: 0.1,
+            lerp: 0.08,
         });
 
         lenisInstance = lenis;
