@@ -522,6 +522,10 @@ const CamerePage = () => {
                 y: 50, opacity: 0, duration: 1, stagger: 0.2, ease: "power2.out",
                 scrollTrigger: { trigger: ".rooms-grid", start: "top 80%" }
             });
+            gsap.from(".gallery-item", {
+                y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power2.out",
+                scrollTrigger: { trigger: ".photo-gallery", start: "top 85%" }
+            });
         }, mainRef);
         return () => ctx.revert();
     }, []);
@@ -530,6 +534,19 @@ const CamerePage = () => {
         { name: 'Camera Padronale', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg') },
         { name: 'Seconda Camera', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg') },
         { name: 'Terza Camera', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8295.jpg') }
+    ];
+
+    const galleryImages = [
+        getImg('room1.jpg'),
+        getImg('room2.jpg'),
+        getImg('room3.jpg'),
+        getImg('EMP_8295.jpg'),
+        getImg('philosophy-1.jpg'),
+        getImg('philosophy-2.jpg'),
+        getImg('philosophy-3.jpg'),
+        getImg('room1_NO.jpg'),
+        getImg('room2_NO.jpg'),
+        getImg('hero.jpg')
     ];
 
     return (
@@ -545,7 +562,7 @@ const CamerePage = () => {
                         Prenotate l'intero appartamento per la vostra famiglia o una singola camera. In entrambi i casi, le chiavi vi apriranno le porte di spazi indipendenti, luminosi e pensati per eliminare ogni stress logistico. Godetevi Roma, al comfort ci pensiamo noi.
                     </p>
                 </div>
-                <div className="rooms-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <div className="rooms-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-32">
                     {rooms.map((room, idx) => (
                         <div key={idx} className="room-card group">
                             <div className="overflow-hidden aspect-[4/5] mb-6 relative">
@@ -555,6 +572,24 @@ const CamerePage = () => {
                             <p className="font-sans font-light text-charcoal/60">{room.desc}</p>
                         </div>
                     ))}
+                </div>
+
+                <div className="photo-gallery pt-24 border-t border-charcoal/5">
+                    <div className="text-center mb-16">
+                        <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Sguardo d'insieme</span>
+                        <h2 className="text-4xl md:text-5xl font-serif text-charcoal">Galleria Fotografica</h2>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {galleryImages.map((img, idx) => (
+                            <div key={idx} className="gallery-item overflow-hidden aspect-square group shadow-md hover:shadow-xl transition-shadow duration-500">
+                                <img 
+                                    src={img} 
+                                    alt={`Gallery photo ${idx + 1}`} 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 grayscale-[20%] hover:grayscale-0" 
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </main>
