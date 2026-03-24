@@ -512,6 +512,10 @@ const Home = () => {
 
 // --- Pages ---
 
+// Dynamically import all images from src/assets
+const allAssets = import.meta.glob('./assets/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const galleryImages = Object.values(allAssets).map(mod => mod.default || mod);
+
 const CamerePage = () => {
     const mainRef = useRef(null);
 
@@ -534,19 +538,6 @@ const CamerePage = () => {
         { name: 'Camera Padronale', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg') },
         { name: 'Seconda Camera', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg') },
         { name: 'Terza Camera', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8295.jpg') }
-    ];
-
-    const galleryImages = [
-        getImg('room1.jpg'),
-        getImg('room2.jpg'),
-        getImg('room3.jpg'),
-        getImg('EMP_8295.jpg'),
-        getImg('philosophy-1.jpg'),
-        getImg('philosophy-2.jpg'),
-        getImg('philosophy-3.jpg'),
-        getImg('room1_NO.jpg'),
-        getImg('room2_NO.jpg'),
-        getImg('hero.jpg')
     ];
 
     return (
