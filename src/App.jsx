@@ -514,7 +514,13 @@ const Home = () => {
                                 </div>
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Matrimoniale 1</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm mb-6">Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.</p>
+                            <button 
+                                onClick={() => { setActiveGallery({ name: 'Camera Matrimoniale 1', images: m1Images }); setIsGalleryOpen(true); }}
+                                className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
+                            >
+                                Guarda Galleria
+                            </button>
                         </div>
 
                         {/* Room 2 */}
@@ -530,7 +536,13 @@ const Home = () => {
                                 </div>
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Matrimoniale 2</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm mb-6">Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.</p>
+                            <button 
+                                onClick={() => { setActiveGallery({ name: 'Camera Matrimoniale 2', images: m2Images }); setIsGalleryOpen(true); }}
+                                className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
+                            >
+                                Guarda Galleria
+                            </button>
                         </div>
 
                         {/* Room 3 */}
@@ -546,7 +558,13 @@ const Home = () => {
                                 </div>
                             </div>
                             <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Singola</h3>
-                            <p className="font-sans font-light text-charcoal/60 text-sm">Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.</p>
+                            <p className="font-sans font-light text-charcoal/60 text-sm mb-6">Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.</p>
+                            <button 
+                                onClick={() => { setActiveGallery({ name: 'Camera Singola', images: sImages }); setIsGalleryOpen(true); }}
+                                className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
+                            >
+                                Guarda Galleria
+                            </button>
                         </div>
                     </div>
 
