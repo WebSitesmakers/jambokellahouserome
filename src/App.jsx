@@ -31,6 +31,63 @@ const ScrollToTop = () => {
 
 // --- Global UI Components ---
 
+const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            gsap.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+            gsap.fromTo(".modal-content", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: "back.out(1.2)" });
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+        <div ref={modalRef} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-charcoal/95 backdrop-blur-xl">
+            <button 
+                onClick={onClose}
+                className="absolute top-6 right-6 z-[110] text-cream hover:text-gold transition-colors p-2 bg-charcoal/50 rounded-full"
+            >
+                <X size={32} />
+            </button>
+            
+            <div className="modal-content w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-cream rounded-3xl p-8 md:p-12 shadow-2xl custom-scrollbar relative">
+                <div className="text-center mb-12">
+                    <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Galleria Fotografica</span>
+                    <h2 className="text-4xl md:text-5xl font-serif text-charcoal">{roomName}</h2>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    {images.map((img, idx) => (
+                        <div key={idx} className="group overflow-hidden rounded-xl aspect-square bg-neutral-200 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
+                            <img 
+                                src={img} 
+                                alt={`${roomName} shot ${idx + 1}`} 
+                                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+                            />
+                        </div>
+                    ))}
+                    {images.length === 0 && (
+                        <div className="col-span-full py-20 text-center opacity-40 font-serif italic text-xl">
+                            Caricamento immagini in corso...
+                        </div>
+                    )}
+                </div>
+                
+                <div className="mt-16 text-center">
+                    <button onClick={onClose} className="px-12 py-4 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-charcoal hover:text-white transition-all duration-300 rounded-full shadow-lg">
+                        Chiudi Galleria
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [scrolled, setScrolled] = React.useState(false);
@@ -164,6 +221,8 @@ const Footer = () => {
 const Home = () => {
     const mainRef = useRef(null);
     const videoRef = useRef(null);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [activeGallery, setActiveGallery] = useState({ name: '', images: [] });
 
     // Initial setting on first render
     const [videoSrc, setVideoSrc] = useState(() => {
@@ -319,6 +378,12 @@ const Home = () => {
 
     return (
         <main ref={mainRef}>
+            <GalleryModal 
+                isOpen={isGalleryOpen} 
+                onClose={() => setIsGalleryOpen(false)} 
+                images={activeGallery.images} 
+                roomName={activeGallery.name} 
+            />
             <Helmet>
                 <title>Jambokella House Rome | La tua dimora a Roma</title>
                 <meta name="description" content="Jambo Kella House: l'eleganza dell'ospitalità romana. Un B&B esclusivo nel cuore di Roma." />
@@ -437,41 +502,50 @@ const Home = () => {
 
                     <div className="reveal-up grid md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
                         {/* Room 1 */}
-                        <div className="room-card-preview group cursor-pointer lg:mt-16">
+                        <div onClick={() => { setActiveGallery({ name: 'Camera Matrimoniale 1', images: m1Images }); setIsGalleryOpen(true); }} className="room-card-preview group cursor-pointer lg:mt-16 relative">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
                                     src={getImg("room1.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
-                                    alt="Camera Padronale" 
+                                    alt="Camera Matrimoniale 1" 
                                 />
+                                <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                    <span className="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs font-bold">Guarda Galleria</span>
+                                </div>
                             </div>
-                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Padronale</h3>
+                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Matrimoniale 1</h3>
                             <p className="font-sans font-light text-charcoal/60 text-sm">Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.</p>
                         </div>
 
                         {/* Room 2 */}
-                        <div className="room-card-preview group cursor-pointer lg:mt-8">
+                        <div onClick={() => { setActiveGallery({ name: 'Camera Matrimoniale 2', images: m2Images }); setIsGalleryOpen(true); }} className="room-card-preview group cursor-pointer lg:mt-8 relative">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
                                     src={getImg("room2.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
-                                    alt="Camera Matrimoniale" 
+                                    alt="Camera Matrimoniale 2" 
                                 />
+                                <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                    <span className="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs font-bold">Guarda Galleria</span>
+                                </div>
                             </div>
-                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Seconda Camera</h3>
+                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Matrimoniale 2</h3>
                             <p className="font-sans font-light text-charcoal/60 text-sm">Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.</p>
                         </div>
 
                         {/* Room 3 */}
-                        <div className="room-card-preview group cursor-pointer">
+                        <div onClick={() => { setActiveGallery({ name: 'Camera Singola', images: sImages }); setIsGalleryOpen(true); }} className="room-card-preview group cursor-pointer relative">
                             <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
                                 <img 
-                                    src={getImg("EMP_8295.jpg")} 
+                                    src={getImg("EMP_8299.jpg")} 
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
-                                    alt="Terza Camera" 
+                                    alt="Camera Singola"
                                 />
+                                <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                    <span className="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs font-bold">Guarda Galleria</span>
+                                </div>
                             </div>
-                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Terza Camera</h3>
+                            <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">Camera Singola</h3>
                             <p className="font-sans font-light text-charcoal/60 text-sm">Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.</p>
                         </div>
                     </div>
@@ -520,8 +594,19 @@ const Home = () => {
 const allAssets = import.meta.glob('./assets/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
 const galleryImages = Object.values(allAssets).map(mod => mod.default || mod);
 
+// Individual Room Assets
+const m1Assets = import.meta.glob('./assets/Camera matrimoniale 1/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const m2Assets = import.meta.glob('./assets/Camera matrimoniale 2/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const sAssets = import.meta.glob('./assets/Camera singola/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+
+const m1Images = Object.values(m1Assets).map(mod => mod.default || mod);
+const m2Images = Object.values(m2Assets).map(mod => mod.default || mod);
+const sImages = Object.values(sAssets).map(mod => mod.default || mod);
+
 const CamerePage = () => {
     const mainRef = useRef(null);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [activeGallery, setActiveGallery] = useState({ name: '', images: [] });
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -539,13 +624,19 @@ const CamerePage = () => {
     }, []);
 
     const rooms = [
-        { name: 'Camera Padronale', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg') },
-        { name: 'Seconda Camera', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg') },
-        { name: 'Terza Camera', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8295.jpg') }
+        { id: 'm1', name: 'Camera Matrimoniale 1', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg'), gallery: m1Images },
+        { id: 'm2', name: 'Camera Matrimoniale 2', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg'), gallery: m2Images },
+        { id: 's', name: 'Camera Singola', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8299.jpg'), gallery: sImages }
     ];
 
     return (
         <main ref={mainRef} className="pt-32 pb-24 bg-cream min-h-screen">
+            <GalleryModal 
+                isOpen={isGalleryOpen} 
+                onClose={() => setIsGalleryOpen(false)} 
+                images={activeGallery.images} 
+                roomName={activeGallery.name} 
+            />
             <Helmet>
                 <title>L'Appartamento | Jambokella House Rome</title>
                 <meta name="description" content="Scopri l'intero appartamento. Tre comode camere matrimoniali dotate di ogni comfort." />
@@ -560,11 +651,20 @@ const CamerePage = () => {
                 <div className="rooms-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-32">
                     {rooms.map((room, idx) => (
                         <div key={idx} className="room-card group">
-                            <div className="overflow-hidden aspect-[4/5] mb-6 relative">
-                                <img src={room.img} alt={room.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 pointer-events-none" />
+                            <div className="overflow-hidden aspect-[4/5] mb-6 relative cursor-pointer" onClick={() => { setActiveGallery({ name: room.name, images: room.gallery }); setIsGalleryOpen(true); }}>
+                                <img src={room.img} alt={room.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
+                                <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                    <span className="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs font-bold">Guarda Galleria</span>
+                                </div>
                             </div>
                             <h3 className="font-serif text-3xl mb-2 text-charcoal">{room.name}</h3>
-                            <p className="font-sans font-light text-charcoal/60">{room.desc}</p>
+                            <p className="font-sans font-light text-charcoal/60 mb-6">{room.desc}</p>
+                            <button 
+                                onClick={() => { setActiveGallery({ name: room.name, images: room.gallery }); setIsGalleryOpen(true); }}
+                                className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
+                            >
+                                Guarda Galleria
+                            </button>
                         </div>
                     ))}
                 </div>
