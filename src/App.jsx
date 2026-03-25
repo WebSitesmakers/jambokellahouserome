@@ -52,9 +52,8 @@ const Navbar = () => {
         <>
             <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-cream/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
                 <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
-                    <Link to="/" className="z-50 flex items-center gap-3 group">
-                        <img src={logo} alt="Jambokella Logo" className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
-                        <span className="font-serif text-2xl md:text-3xl font-bold tracking-widest uppercase text-charcoal hidden sm:block">Jambokella</span>
+                    <Link to="/" className="z-50 flex items-center group">
+                        <img src={logo} alt="Jambokella Logo" className="h-12 md:h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
                     </Link>
 
                     {/* Desktop Menu */}
