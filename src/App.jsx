@@ -31,6 +31,75 @@ const ScrollToTop = () => {
 
 // --- Global UI Components ---
 
+const BookingModal = ({ isOpen, onClose }) => {
+    const modalRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+            gsap.fromTo(modalRef.current, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" });
+            gsap.fromTo(".booking-content", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: "back.out(1.2)" });
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [isOpen]);
+
+    if (!isOpen) return null;
+
+    return (
+        <div ref={modalRef} className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8 bg-charcoal/95 backdrop-blur-xl">
+            <button 
+                onClick={onClose}
+                className="absolute top-6 right-6 z-[210] text-cream hover:text-gold transition-colors p-2 bg-charcoal/50 rounded-full"
+            >
+                <X size={32} />
+            </button>
+            
+            <div className="booking-content w-full max-w-2xl bg-cream rounded-3xl p-10 md:p-16 shadow-2xl relative text-center">
+                <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block text-center">Prenotazione Diretta</span>
+                <h2 className="text-4xl md:text-5xl font-serif text-charcoal mb-8 text-center">Scegli la tua piattaforma preferita</h2>
+                <p className="font-sans font-light text-charcoal/60 mb-12 text-lg">Seleziona uno dei nostri partner ufficiali per verificare la disponibilità e completare la tua prenotazione.</p>
+                
+                <div className="grid gap-6">
+                    <a 
+                        href="https://www.airbnb.it/rooms/1356341061663554508?source_impression_id=p3_1774440128_P3pp37wRsS45aaBE" 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="flex items-center justify-between p-6 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-xl transition-all group lg:px-10"
+                    >
+                        <div className="flex flex-col items-start">
+                            <span className="font-serif text-2xl text-charcoal group-hover:text-gold transition-colors">Prenota su Airbnb</span>
+                            <span className="text-sm font-sans text-charcoal/40">Sicuro, veloce, garantito.</span>
+                        </div>
+                        <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
+                             <Instagram className="text-charcoal group-hover:text-gold" size={24} />
+                        </div>
+                    </a>
+
+                    <a 
+                        href="https://www.vrbo.com/it-it/affitto-vacanze/p11773198" 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="flex items-center justify-between p-6 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-xl transition-all group lg:px-10"
+                    >
+                        <div className="flex flex-col items-start">
+                            <span className="font-serif text-2xl text-charcoal group-hover:text-gold transition-colors">Prenota su VRBO</span>
+                            <span className="text-sm font-sans text-charcoal/40">Ideale per soggiorni prolungati.</span>
+                        </div>
+                        <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
+                             <Instagram className="text-charcoal group-hover:text-gold" size={24} />
+                        </div>
+                    </a>
+                </div>
+
+                <div className="mt-12 pt-8 border-t border-neutral-100">
+                    <p className="text-xs font-sans text-charcoal/40 uppercase tracking-widest">Supporto diretto disponibile via WhatsApp o Email</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
     const modalRef = useRef(null);
 
@@ -88,7 +157,7 @@ const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
     );
 };
 
-const Navbar = () => {
+const Navbar = ({ onOpenBooking }) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [scrolled, setScrolled] = React.useState(false);
 
@@ -121,9 +190,9 @@ const Navbar = () => {
                                 <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         ))}
-                        <Link to="/prenota" className="btn-magnetic px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 ml-4 font-bold">
+                        <button onClick={onOpenBooking} className="btn-magnetic px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 ml-4 font-bold">
                             Prenota
-                        </Link>
+                        </button>
                     </div>
 
                     {/* Mobile Toggle */}
@@ -141,16 +210,16 @@ const Navbar = () => {
                             {link.name}
                         </Link>
                     ))}
-                    <Link to="/prenota" onClick={() => setIsOpen(false)} className="mt-8 px-8 py-3 bg-gold text-white text-lg tracking-widest uppercase font-sans hover:bg-charcoal transition-colors">
+                    <button onClick={() => { setIsOpen(false); onOpenBooking(); }} className="mt-8 px-8 py-3 bg-gold text-white text-lg tracking-widest uppercase font-sans hover:bg-charcoal transition-colors">
                         Prenota Ora
-                    </Link>
+                    </button>
                 </div>
             </div>
         </>
     );
 };
 
-const Footer = () => {
+const Footer = ({ onOpenBooking }) => {
     return (
         <footer className="bg-charcoal text-cream pt-24 pb-12 mt-24">
             <div className="container mx-auto px-6 lg:px-12">
@@ -198,9 +267,9 @@ const Footer = () => {
                             <Instagram className="w-5 h-5" />
                             <span>@JambokellaHouserome</span>
                         </a>
-                        <Link to="/prenota" className="btn-magnetic px-8 py-3 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-cream hover:text-charcoal transition-colors">
+                        <button onClick={onOpenBooking} className="btn-magnetic px-8 py-3 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-cream hover:text-charcoal transition-colors">
                             Verifica disponibilità
-                        </Link>
+                        </button>
                     </div>
                 </div>
 
@@ -218,7 +287,7 @@ const Footer = () => {
 
 // --- Pages ---
 
-const Home = () => {
+const Home = ({ onOpenBooking }) => {
     const mainRef = useRef(null);
     const videoRef = useRef(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
@@ -416,9 +485,9 @@ const Home = () => {
                     </h1>
                     
                     <div className="reveal-up mt-4 md:mt-8 flex flex-col items-center gap-3">
-                        <Link to="/prenota" className="btn-magnetic px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
+                        <button onClick={onOpenBooking} className="btn-magnetic px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
                             Trova le tue date al miglior prezzo
-                        </Link>
+                        </button>
                         <p className="text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
                             Prenotazione diretta senza commissioni • Cancellazione flessibile
                         </p>
@@ -621,7 +690,7 @@ const m1Images = Object.values(m1Assets).map(mod => mod.default || mod);
 const m2Images = Object.values(m2Assets).map(mod => mod.default || mod);
 const sImages = Object.values(sAssets).map(mod => mod.default || mod);
 
-const CamerePage = () => {
+const CamerePage = ({ onOpenBooking }) => {
     const mainRef = useRef(null);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [activeGallery, setActiveGallery] = useState({ name: '', images: [] });
@@ -709,7 +778,7 @@ const CamerePage = () => {
     );
 };
 
-const EsperienzePage = () => {
+const EsperienzePage = ({ onOpenBooking }) => {
     const mainRef = useRef(null);
 
     useEffect(() => {
@@ -807,7 +876,7 @@ const EsperienzePage = () => {
     );
 };
 
-const LocationPage = () => {
+const LocationPage = ({ onOpenBooking }) => {
     const mainRef = useRef(null);
 
     useEffect(() => {
@@ -839,7 +908,7 @@ const LocationPage = () => {
                     </div>
                     <div>
                         <h3 className="font-serif text-2xl mb-4 text-charcoal">Come Raggiungerci</h3>
-                        <p className="leading-relaxed mb-4"><strong>In Treno:</strong> Dalla Stazione Trastevere il nostro B&B a Monteverde è facilmente raggiungibile con i tram 8 o 3 o il bus H.</p>
+                        <p className="leading-relaxed mb-4"><strong>In Treno:</strong> Dalla Stazione Trastevere il nostro B&B a Monteverde è facilmente raggiungibile con il tram 8 o il bus H. Da Termini con il bus H in 30 minuti</p>
                         <p className="leading-relaxed"><strong>In Aereo:</strong> Dall'aeroporto di Fiumicino, il treno diretto ferma alla Stazione Trastevere (porta di Monteverde) in soli 26 minuti.</p>
                     </div>
                 </div>
@@ -851,6 +920,8 @@ const LocationPage = () => {
 // --- App ---
 
 const App = () => {
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1.5,
@@ -885,16 +956,17 @@ const App = () => {
             <Router>
                 <ScrollToTop />
                 <div className="min-h-screen flex flex-col">
-                    <Navbar />
+                    <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+                    <Navbar onOpenBooking={() => setIsBookingOpen(true)} />
                     <div className="flex-grow">
                         <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/camere" element={<CamerePage />} />
-                            <Route path="/location" element={<LocationPage />} />
-                            <Route path="/esperienze" element={<EsperienzePage />} />
+                            <Route path="/" element={<Home onOpenBooking={() => setIsBookingOpen(true)} />} />
+                            <Route path="/camere" element={<CamerePage onOpenBooking={() => setIsBookingOpen(true)} />} />
+                            <Route path="/location" element={<LocationPage onOpenBooking={() => setIsBookingOpen(true)} />} />
+                            <Route path="/esperienze" element={<EsperienzePage onOpenBooking={() => setIsBookingOpen(true)} />} />
                         </Routes>
                     </div>
-                    <Footer />
+                    <Footer onOpenBooking={() => setIsBookingOpen(true)} />
                 </div>
             </Router>
         </HelmetProvider>
