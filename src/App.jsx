@@ -4,7 +4,7 @@ import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-ro
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Menu, X, MapPin, Instagram, Mail, Phone } from 'lucide-react';
+import { Menu, X, MapPin, Instagram, Mail, Phone, ExternalLink } from 'lucide-react';
 import logo from './assets/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -72,7 +72,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             <span className="text-sm font-sans text-charcoal/40">Sicuro, veloce, garantito.</span>
                         </div>
                         <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
-                             <Instagram className="text-charcoal group-hover:text-gold" size={24} />
+                             <ExternalLink className="text-charcoal group-hover:text-gold" size={24} />
                         </div>
                     </a>
 
@@ -87,7 +87,7 @@ const BookingModal = ({ isOpen, onClose }) => {
                             <span className="text-sm font-sans text-charcoal/40">Ideale per soggiorni prolungati.</span>
                         </div>
                         <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
-                             <Instagram className="text-charcoal group-hover:text-gold" size={24} />
+                             <ExternalLink className="text-charcoal group-hover:text-gold" size={24} />
                         </div>
                     </a>
                 </div>
