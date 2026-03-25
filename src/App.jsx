@@ -5,6 +5,7 @@ import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Menu, X, MapPin, Instagram, Mail, Phone } from 'lucide-react';
+import logo from './assets/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,8 +52,9 @@ const Navbar = () => {
         <>
             <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-cream/90 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
                 <div className="container mx-auto px-6 lg:px-12 flex justify-between items-center">
-                    <Link to="/" className="z-50 font-serif text-3xl font-bold tracking-widest uppercase text-charcoal">
-                        Jambokella
+                    <Link to="/" className="z-50 flex items-center gap-3 group">
+                        <img src={logo} alt="Jambokella Logo" className="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-105" />
+                        <span className="font-serif text-2xl md:text-3xl font-bold tracking-widest uppercase text-charcoal hidden sm:block">Jambokella</span>
                     </Link>
 
                     {/* Desktop Menu */}
@@ -99,8 +101,11 @@ const Footer = () => {
                 <div className="grid md:grid-cols-3 gap-16 mb-20 text-center md:text-left">
                     
                     {/* Brand */}
-                    <div className="flex flex-col items-center md:items-start">
-                        <h3 className="font-serif text-3xl mb-6 tracking-widest uppercase text-gold">Jambokella</h3>
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <div className="flex items-center gap-3 mb-6">
+                            <img src={logo} alt="Jambokella Logo" className="h-10 w-auto object-contain brightness-0 invert" />
+                            <h3 className="font-serif text-3xl tracking-widest uppercase text-gold">Jambokella</h3>
+                        </div>
                         <p className="text-cream/60 font-sans font-light max-w-sm leading-relaxed mb-6">
                             Jambokella è nata per accogliere.<br/>
                             Una vera casa romana dove abbiamo curato ogni dettaglio per farvi staccare la spina alla fine della giornata.
