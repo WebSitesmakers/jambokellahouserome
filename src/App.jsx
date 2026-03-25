@@ -55,45 +55,48 @@ const BookingModal = ({ isOpen, onClose }) => {
                 <X size={32} />
             </button>
             
-            <div className="booking-content w-full max-w-2xl bg-cream rounded-3xl p-10 md:p-16 shadow-2xl relative text-center">
-                <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block text-center">Prenotazione Diretta</span>
-                <h2 className="text-4xl md:text-5xl font-serif text-charcoal mb-8 text-center">Scegli la tua piattaforma preferita</h2>
-                <p className="font-sans font-light text-charcoal/60 mb-12 text-lg">Seleziona uno dei nostri partner ufficiali per verificare la disponibilità e completare la tua prenotazione.</p>
+            <div className="booking-content w-full max-w-2xl bg-cream rounded-3xl p-10 md:p-14 shadow-2xl relative">
+                <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block text-center">Richiesta Informazioni</span>
+                <h2 className="text-4xl md:text-5xl font-serif text-charcoal mb-8 text-center">Contattaci per maggiori informazioni</h2>
+                <p className="font-sans font-light text-charcoal/60 mb-10 text-lg text-center">Siamo a tua disposizione per trovare la soluzione migliore per le tue date.</p>
                 
-                <div className="grid gap-6">
-                    <a 
-                        href="https://www.airbnb.it/rooms/1356341061663554508?source_impression_id=p3_1774440128_P3pp37wRsS45aaBE" 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="flex items-center justify-between p-6 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-xl transition-all group lg:px-10"
-                    >
-                        <div className="flex flex-col items-start">
-                            <span className="font-serif text-2xl text-charcoal group-hover:text-gold transition-colors">Prenota su Airbnb</span>
-                            <span className="text-sm font-sans text-charcoal/40">Sicuro, veloce, garantito.</span>
-                        </div>
-                        <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
-                             <ExternalLink className="text-charcoal group-hover:text-gold" size={24} />
-                        </div>
-                    </a>
+                <div className="grid gap-4">
+                    {[
+                        { lang: 'Italiano', num: '+39 330 455163', tel: '+39330455163' },
+                        { lang: 'English', num: '+39 334 2044493', tel: '+393342044493' },
+                        { lang: 'Português', num: '+39 339 9909559', tel: '+393399909559' }
+                    ].map((contact, idx) => (
+                        <a 
+                            key={idx}
+                            href={`tel:${contact.tel}`}
+                            className="flex items-center justify-between p-5 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-lg transition-all group"
+                        >
+                            <div className="flex flex-col items-start px-2">
+                                <span className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">{contact.lang}</span>
+                                <span className="font-serif text-2xl text-charcoal group-hover:text-gold transition-colors">{contact.num}</span>
+                            </div>
+                            <div className="w-10 h-10 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors mr-2">
+                                 <Phone className="text-charcoal group-hover:text-gold" size={20} />
+                            </div>
+                        </a>
+                    ))}
 
                     <a 
-                        href="https://www.vrbo.com/it-it/affitto-vacanze/p11773198" 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="flex items-center justify-between p-6 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-xl transition-all group lg:px-10"
+                        href="mailto:jambokellahouseroma@gmail.com"
+                        className="flex items-center justify-between p-5 bg-white border border-neutral-200 rounded-2xl hover:border-gold hover:shadow-lg transition-all group"
                     >
-                        <div className="flex flex-col items-start">
-                            <span className="font-serif text-2xl text-charcoal group-hover:text-gold transition-colors">Prenota su VRBO</span>
-                            <span className="text-sm font-sans text-charcoal/40">Ideale per soggiorni prolungati.</span>
+                        <div className="flex flex-col items-start px-2">
+                            <span className="text-[10px] uppercase tracking-widest text-gold font-bold mb-1">Email</span>
+                            <span className="font-serif text-xl md:text-2xl text-charcoal group-hover:text-gold transition-colors">jambokellahouseroma@gmail.com</span>
                         </div>
-                        <div className="w-12 h-12 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors">
-                             <ExternalLink className="text-charcoal group-hover:text-gold" size={24} />
+                        <div className="w-10 h-10 flex items-center justify-center bg-neutral-50 rounded-full group-hover:bg-gold/10 transition-colors mr-2">
+                             <Mail className="text-charcoal group-hover:text-gold" size={20} />
                         </div>
                     </a>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-neutral-100">
-                    <p className="text-xs font-sans text-charcoal/40 uppercase tracking-widest">Supporto diretto disponibile via WhatsApp o Email</p>
+                <div className="mt-10 pt-8 border-t border-neutral-100 flex justify-center gap-6">
+                    <p className="text-[10px] font-sans text-charcoal/40 uppercase tracking-[0.2em]">Disponibile su WhatsApp • Email • Telefono</p>
                 </div>
             </div>
         </div>
@@ -132,7 +135,7 @@ const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {images.map((img, idx) => (
-                        <div key={idx} className="group overflow-hidden rounded-xl aspect-square bg-neutral-200 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
+                        <div key={idx} className="gallery-item overflow-hidden rounded-xl aspect-square bg-neutral-200 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
                             <img 
                                 src={img} 
                                 alt={`${roomName} shot ${idx + 1}`} 
@@ -191,7 +194,7 @@ const Navbar = ({ onOpenBooking }) => {
                             </Link>
                         ))}
                         <button onClick={onOpenBooking} className="btn-magnetic px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 ml-4 font-bold">
-                            Prenota
+                            Ottieni maggiori informazioni
                         </button>
                     </div>
 
@@ -211,7 +214,7 @@ const Navbar = ({ onOpenBooking }) => {
                         </Link>
                     ))}
                     <button onClick={() => { setIsOpen(false); onOpenBooking(); }} className="mt-8 px-8 py-3 bg-gold text-white text-lg tracking-widest uppercase font-sans hover:bg-charcoal transition-colors">
-                        Prenota Ora
+                        Ottieni maggiori informazioni
                     </button>
                 </div>
             </div>
@@ -228,8 +231,7 @@ const Footer = ({ onOpenBooking }) => {
                     {/* Brand */}
                     <div className="flex flex-col items-center md:items-start text-center md:text-left">
                         <div className="flex items-center gap-3 mb-6">
-                            <img src={logo} alt="Jambokella Logo" className="h-10 w-auto object-contain brightness-0 invert" />
-                            <h3 className="font-serif text-3xl tracking-widest uppercase text-gold">Jambokella</h3>
+                            <img src={logo} alt="Jambokella Logo" className="h-12 w-auto object-contain brightness-0 invert" />
                         </div>
                         <p className="text-cream/60 font-sans font-light max-w-sm leading-relaxed mb-6">
                             Jambokella è nata per accogliere.<br/>
@@ -281,7 +283,7 @@ const Footer = ({ onOpenBooking }) => {
                             <span>@JambokellaHouserome</span>
                         </a>
                         <button onClick={onOpenBooking} className="btn-magnetic px-8 py-3 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-cream hover:text-charcoal transition-colors">
-                            Verifica disponibilità
+                            Ottieni maggiori informazioni
                         </button>
                     </div>
                 </div>
@@ -474,14 +476,14 @@ const Home = ({ onOpenBooking }) => {
             {/* HERO SECTION */}
             <section className="hero-section relative h-[100dvh] w-full overflow-hidden flex items-center justify-center rounded-b-[3rem] shadow-2xl z-10 mx-auto bg-charcoal pt-32 pb-16 md:p-0">
                 <div className="absolute inset-0 bg-charcoal/40 z-10"></div>
-                <div className="hero-image-container absolute inset-0 w-full h-full z-0 opacity-80">
+                <div className="hero-image-container absolute inset-0 w-full h-full object-cover z-0 opacity-80">
                     <video 
                         ref={videoRef}
                         autoPlay
                         muted 
                         loop 
                         playsInline 
-                        disablePictureInPicture
+                        disablePictureinPicture
                         controlsList="nopictureinpicture"
                         className="w-full h-full object-cover"
                     >
@@ -492,17 +494,17 @@ const Home = ({ onOpenBooking }) => {
                     <span className="hero-subtitle font-sans tracking-widest uppercase text-gold text-sm md:text-base font-bold mb-4 md:mb-8 block drop-shadow-md">
                         Riposo autentico nel cuore di Roma
                     </span>
-                    <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 md:mb-8 drop-shadow-2xl leading-tight text-white">
-                        <span className="block">Jambokella</span>
-                        <span className="block italic font-light text-3xl md:text-6xl text-gold mt-2">La vostra oasi di pace a Monteverde.</span>
+                    <h1 className="hero-title mb-6 md:mb-8 drop-shadow-2xl flex flex-col items-center">
+                        <img src={logo} alt="Jambokella Logo" className="h-20 md:h-28 lg:h-32 w-auto object-contain brightness-0 invert drop-shadow-2xl mb-4" />
+                        <span className="block italic font-light text-3xl md:text-5xl lg:text-6xl text-gold">La vostra oasi di pace a Monteverde.</span>
                     </h1>
                     
                     <div className="reveal-up mt-4 md:mt-8 flex flex-col items-center gap-3">
                         <button onClick={onOpenBooking} className="btn-magnetic px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
-                            Trova le tue date al miglior prezzo
+                            Ottieni maggiori informazioni
                         </button>
                         <p className="text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
-                            Prenotazione diretta senza commissioni • Cancellazione flessibile
+                            Contatto diretto senza commissioni • Cancellazione flessibile
                         </p>
                     </div>
                 </div>
@@ -541,10 +543,10 @@ const Home = ({ onOpenBooking }) => {
                             
                             <div className="reveal-up space-y-6 max-w-xl">
                                 <p className="text-lg md:text-xl font-sans font-light text-charcoal/80 leading-relaxed italic border-l-2 border-gold pl-8 py-4">
-                                    "Roma è magnifica, ma esplorarla tutto il giorno richiede energie. Abbiamo trasformato Jambokella House in un rifugio di quiete assoluta."
+                                    "Questo luminoso ed elegante appartamento nel cuore di Monteverde è stato progettato per rendere il vostro soggiorno a Roma indimenticabile e senza stress."
                                 </p>
                                 <p className="text-base md:text-lg font-sans font-light text-charcoal/60 leading-relaxed">
-                                    Materassi comodi per dormire profondamente, pulizia impeccabile e spazi dove il frastuono della città resta chiuso fuori dalla porta. Vi garantiamo il riposo di cui avete bisogno per vivere la bellezza di Roma al cento per cento.
+                                    Recentemente ristrutturato con arredi moderni, l'intero appartamento è a vostra esclusiva disposizione e dispone di ogni comfort, dal Wi-Fi ad alta velocità agli spazi ampi. È la soluzione ideale per coppie e famiglie, potendo accogliere comodamente fino a cinque persone con la possibilità di richiedere un letto aggiuntivo o una culla. L'appartamento dispone inoltre di un ampio spazio esterno con tavolo da pranzo con 6 posti.
                                 </p>
                             </div>
 
@@ -648,6 +650,34 @@ const Home = ({ onOpenBooking }) => {
                                 Guarda Galleria
                             </button>
                         </div>
+
+                        {/* Common Areas - Integrated */}
+                        {[
+                            { name: 'Sala da Pranzo e Cucina', desc: 'Soggiorno con cucina attrezzata e ogni comfort.', img: salaImages[0], gallery: salaImages },
+                            { name: 'Bagni comfort', desc: 'Due comodi bagni con doccia e lavasciuga.', img: bagniImages[0], gallery: bagniImages },
+                            { name: 'Ampio Balcone', desc: 'Tavolo per 6 persone ideale per colazioni e cene.', img: balconeImages[0], gallery: balconeImages }
+                        ].map((area, idx) => (
+                            <div key={idx} onClick={() => { setActiveGallery({ name: area.name, images: area.gallery }); setIsGalleryOpen(true); }} className="room-card-preview group cursor-pointer relative">
+                                <div className="overflow-hidden aspect-[4/5] object-cover relative mb-6 rounded-2xl shadow-lg">
+                                    <img 
+                                        src={area.img} 
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" 
+                                        alt={area.name} 
+                                    />
+                                    <div className="absolute inset-0 bg-charcoal/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                                        <span className="px-6 py-2 border border-white text-white uppercase tracking-widest text-xs font-bold">Guarda Galleria</span>
+                                    </div>
+                                </div>
+                                <h3 className="font-serif text-2xl mb-2 text-charcoal group-hover:text-gold transition-colors">{area.name}</h3>
+                                <p className="font-sans font-light text-charcoal/60 text-sm mb-6">{area.desc}</p>
+                                <button 
+                                    onClick={() => { setActiveGallery({ name: area.name, images: area.gallery }); setIsGalleryOpen(true); }}
+                                    className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
+                                >
+                                    Guarda Galleria
+                                </button>
+                            </div>
+                        ))}
                     </div>
 
                     <div className="mt-12 text-center md:hidden">
@@ -667,7 +697,7 @@ const Home = ({ onOpenBooking }) => {
                             A 15 minuti da tutto, <span className="italic text-gold">a chilometri dal caos.</span>
                         </h2>
                         <p className="reveal-up font-sans font-light text-cream/70 text-lg leading-relaxed mb-10 max-w-lg">
-                            Sarete nel quartiere più vero di Roma, Monteverde. Abbastanza centrali da poter uscire a piedi la mattina ed essere subito tra i monumenti, ma in una via che vi protegge dalla movida notturna. Addormentarvi nel silenzio, svegliarvi nel cuore della storia.
+                            La zona è strategica: il tram 8 vi porta direttamente nel centro storico in pochi minuti. La vicinanza con la stazione Trastevere è ideale per chi arriva dall'aeroporto. Avrete tutto a portata di mano: supermercati, ristoranti tipici e la splendida Villa Doria Pamphili per i vostri momenti di relax nel verde.
                         </p>
                         <Link to="/location" className="btn-magnetic reveal-up inline-flex items-center gap-3 border border-gold px-8 py-3 text-gold hover:bg-gold hover:text-charcoal transition-colors tracking-widest uppercase font-sans text-xs font-bold">
                             Esplora la mappa
@@ -692,16 +722,24 @@ const Home = ({ onOpenBooking }) => {
 
 // Dynamically import all images from src/assets
 const allAssets = import.meta.glob('./assets/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
-const galleryImages = Object.values(allAssets).map(mod => mod.default || mod);
+const galleryImages = Object.values(allAssets)
+    .map(mod => mod.default || mod)
+    .filter(img => typeof img === 'string' && !img.includes('logo.png'));
 
 // Individual Room Assets
 const m1Assets = import.meta.glob('./assets/Camera matrimoniale 1/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
 const m2Assets = import.meta.glob('./assets/Camera matrimoniale 2/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
 const sAssets = import.meta.glob('./assets/Camera singola/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const salaAssets = import.meta.glob('./assets/Sala da pranzo/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const bagniAssets = import.meta.glob('./assets/Bagni/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
+const balconeAssets = import.meta.glob('./assets/Balcone/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
 
 const m1Images = Object.values(m1Assets).map(mod => mod.default || mod);
 const m2Images = Object.values(m2Assets).map(mod => mod.default || mod);
 const sImages = Object.values(sAssets).map(mod => mod.default || mod);
+const salaImages = Object.values(salaAssets).map(mod => mod.default || mod);
+const bagniImages = Object.values(bagniAssets).map(mod => mod.default || mod);
+const balconeImages = Object.values(balconeAssets).map(mod => mod.default || mod);
 
 const CamerePage = ({ onOpenBooking }) => {
     const mainRef = useRef(null);
@@ -724,9 +762,12 @@ const CamerePage = ({ onOpenBooking }) => {
     }, []);
 
     const rooms = [
-        { id: 'm1', name: 'Camera Matrimoniale 1', desc: 'Spaziosa, con dettagli di design e un materasso premium per farvi dimenticare i chilometri percorsi a piedi.', img: getImg('room1.jpg'), gallery: m1Images },
-        { id: 'm2', name: 'Camera Matrimoniale 2', desc: 'Silenziosa e luminosa, con un armadio grande e una scrivania per lavorare.', img: getImg('room2.jpg'), gallery: m2Images },
-        { id: 's', name: 'Camera Singola', desc: 'Compatta ma ben organizzata. Intimità totale e spazio per lasciare le valige.', img: getImg('EMP_8299.jpg'), gallery: sImages }
+        { id: 'm1', name: 'Camera Matrimoniale 1', desc: 'Comoda e grande camera matrimoniale completa di grandi armadi, scrivania, Smart TV, Clima, Balcone e possibilità di Letto Aggiuntivo.', img: getImg('room1.jpg'), gallery: m1Images },
+        { id: 'm2', name: 'Camera Matrimoniale 2', desc: 'Grande camera matrimoniale completa di spazioso armadio, scrivania, Smart TV, clima, Balcone e possibilità di Culla.', img: getImg('room2.jpg'), gallery: m2Images },
+        { id: 's', name: 'Camera 3 (Singola)', desc: 'Camera spaziosa con letto singolo, completa di armadio, Smart TV, clima e balcone.', img: getImg('EMP_8299.jpg'), gallery: sImages },
+        { id: 'sala', name: 'Sala da Pranzo e Cucina', desc: 'Spazioso soggiorno con induzione, lavastoviglie e ogni comfort.', img: salaImages[0], gallery: salaImages },
+        { id: 'bagni', name: 'Bagni', desc: 'Due bagni completi di doccia, phon e lavasciuga.', img: bagniImages[0], gallery: bagniImages },
+        { id: 'balcone', name: 'Balcone', desc: 'Spazio esterno con tavolo per 6 persone ideale per cenare.', img: balconeImages[0], gallery: balconeImages }
     ];
 
     return (
@@ -739,13 +780,13 @@ const CamerePage = ({ onOpenBooking }) => {
             />
             <Helmet>
                 <title>L'Appartamento | Jambokella House Rome</title>
-                <meta name="description" content="Scopri l'intero appartamento. Tre comode camere matrimoniali dotate di ogni comfort." />
+                <meta name="description" content="Scopri l'intero appartamento a tua disposizione. Tre comode camere e spazi ampi dotati di ogni comfort." />
             </Helmet>
             <div className="container mx-auto px-6 lg:px-12">
                 <div className="max-w-3xl mx-auto text-center mb-16">
-                    <h1 className="page-title text-5xl md:text-6xl font-serif text-charcoal mb-6">L'Appartamento</h1>
+                    <h1 className="page-title text-5xl md:text-6xl font-serif text-charcoal mb-6">Esclusivo per voi</h1>
                     <p className="page-title font-sans font-light text-charcoal/70 text-lg leading-relaxed">
-                        Prenotate l'intero appartamento per la vostra famiglia o una singola camera. In entrambi i casi, le chiavi vi apriranno le porte di spazi indipendenti, luminosi e pensati per eliminare ogni stress logistico. Godetevi Roma, al comfort ci pensiamo noi.
+                        L'intera casa è a vostra disposizione. Ogni spazio è stato ristrutturato per offrirvi il massimo del comfort, della tecnologia e della privacy.
                     </p>
                 </div>
                 <div className="rooms-grid grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-32">
@@ -758,7 +799,7 @@ const CamerePage = ({ onOpenBooking }) => {
                                 </div>
                             </div>
                             <h3 className="font-serif text-3xl mb-2 text-charcoal">{room.name}</h3>
-                            <p className="font-sans font-light text-charcoal/60 mb-6">{room.desc}</p>
+                            <p className="font-sans font-light text-charcoal/60 mb-6 leading-relaxed">{room.desc}</p>
                             <button 
                                 onClick={() => { setActiveGallery({ name: room.name, images: room.gallery }); setIsGalleryOpen(true); }}
                                 className="text-gold uppercase tracking-tighter font-bold border-b border-gold pb-1 hover:text-charcoal hover:border-charcoal transition-colors"
@@ -769,7 +810,7 @@ const CamerePage = ({ onOpenBooking }) => {
                     ))}
                 </div>
 
-                <div className="photo-gallery pt-24 border-t border-charcoal/5">
+                <div className="photo-gallery pt-24 mt-24 border-t border-charcoal/5">
                     <div className="text-center mb-16">
                         <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Sguardo d'insieme</span>
                         <h2 className="text-4xl md:text-5xl font-serif text-charcoal">Galleria Fotografica</h2>
@@ -822,7 +863,7 @@ const EsperienzePage = ({ onOpenBooking }) => {
         {
             title: "Le passeggiate giuste",
             category: "Panorami",
-            desc: "Itinerari serali fuori rotta per vedere la città illuminata quando le piazze principali si svuotano.",
+            desc: "A pochi passi dall'abitazione ci si può immergere nel verde di Villa Pamphili o nel cuore dell'antico mercato di Porta Portese.",
             img: getImg("experience-views.jpg")
         },
         {
@@ -840,15 +881,15 @@ const EsperienzePage = ({ onOpenBooking }) => {
                 <meta name="description" content="Vivi Roma come un locale. I nostri consigli per scoprire i segreti della Città Eterna." />
             </Helmet>
             <div className="container mx-auto px-6 lg:px-12 page-content max-w-6xl">
-                <div className="text-center mb-24 max-w-3xl mx-auto">
+                <div className="text-center mb-20 max-w-3xl mx-auto">
                     <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Vivere Roma</span>
                     <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-8">Godetevi Roma, senza cadere nelle trappole per turisti.</h1>
                     <p className="font-sans font-light text-charcoal/70 text-lg leading-relaxed">
-                        Viviamo questa città da sempre e ci fa piacere condividere con voi i nostri posti del cuore. Dalla trattoria sincera dove andiamo la domenica, ai panorami che non stancano mai. Chiedeteci pure.
+                        Viviamo questa città e ci fa piacere condividere con voi i nostri posti del cuore. Dalla trattoria sincera ai panorami che non stancano mai. Chiedeteci pure.
                     </p>
                 </div>
 
-                <div className="experiences-grid space-y-32">
+                <div className="experiences-grid space-y-32 mb-40">
                     {experiences.map((exp, idx) => (
                         <div key={idx} className={`experience-card flex flex-col ${idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 lg:gap-24`}>
                             <div className="w-full lg:w-3/5 overflow-hidden rounded-2xl shadow-2xl aspect-[16/9] relative group">
@@ -871,14 +912,62 @@ const EsperienzePage = ({ onOpenBooking }) => {
                     ))}
                 </div>
 
+                {/* I Nostri Consigli - Museum Tips */}
+                <div className="mt-40 pt-24 border-t border-charcoal/10">
+                    <div className="flex flex-col lg:flex-row gap-16">
+                        <div className="lg:w-1/3">
+                            <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Consigli Utili</span>
+                            <h2 className="text-4xl font-serif text-charcoal mb-6">I musei gratuiti</h2>
+                            <p className="font-sans font-light text-charcoal/60 leading-relaxed mb-6">
+                                Ogni prima domenica del mese, l'ingresso è gratuito in molti dei principali musei statali, aree archeologiche e monumenti di Roma. Vi consigliamo di arrivare presto perché non si può prenotare online.
+                            </p>
+                            <div className="p-6 bg-gold/5 border border-gold/20 rounded-2xl">
+                                <p className="text-gold text-sm font-bold uppercase tracking-widest mb-2">Da non perdere:</p>
+                                <ul className="text-charcoal/70 text-sm space-y-2 font-sans">
+                                    <li>• Colosseo, Foro Romano e Palatino</li>
+                                    <li>• Galleria Borghese (richiesta info su ingresso)</li>
+                                    <li>• Castel Sant'Angelo</li>
+                                    <li>• Pantheon</li>
+                                    <li>• Terme di Caracalla</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div className="lg:w-2/3">
+                            <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block">Muoversi a Roma</span>
+                            <h2 className="text-4xl font-serif text-charcoal mb-8">Tempi di percorrenza</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {[
+                                    { place: "Piazza Venezia", time: "~20 min", detail: "Tram 8 diretto" },
+                                    { place: "Trastevere", time: "~10 min", detail: "Tram 8 diretto" },
+                                    { place: "Campo de' Fiori / Piazza Navona", time: "~25 min", detail: "Tram 8 + 5 min a piedi" },
+                                    { place: "Colosseo", time: "~35 min", detail: "Tram 8 + camminata" },
+                                    { place: "San Pietro / Vaticano", time: "~30-35 min", detail: "Bus 982/870" },
+                                    { place: "Stazione Termini", time: "~35-40 min", detail: "Bus H" },
+                                    { place: "Aeroporto Fiumicino", time: "~30 min", detail: "Treno da Stazione Trastevere" },
+                                    { place: "Bocca della Verità", time: "~25 min", detail: "Bus 44" }
+                                ].map((item, i) => (
+                                    <div key={i} className="flex justify-between items-center p-4 border-b border-charcoal/5 font-sans">
+                                        <div>
+                                            <p className="font-bold text-charcoal">{item.place}</p>
+                                            <p className="text-[10px] text-charcoal/40 uppercase tracking-widest">{item.detail}</p>
+                                        </div>
+                                        <p className="text-gold font-bold">{item.time}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="mt-40 text-center bg-charcoal rounded-[3rem] p-16 md:p-24 text-cream relative overflow-hidden">
                     <div className="relative z-10 space-y-8">
                         <h2 className="text-4xl md:text-5xl font-serif">Chiedeteci il vostro piano perfetto</h2>
                         <p className="font-sans font-light text-cream/70 text-lg max-w-2xl mx-auto">
-                            Viviamo Roma ogni giorno e conosciamo bene i luoghi da non perdere (e quelli da evitare). Scriveteci per qualsiasi suggerimento su come organizzare le vostre giornate.
+                            Viviamo Roma ogni giorno e conosciamo bene i luoghi da non perdere. Scriveteci per qualsiasi suggerimento.
                         </p>
-                        <div className="pt-8">
-                            <a href="mailto:jambokellahouseroma@gmail.com" className="inline-block bg-gold text-charcoal px-10 py-4 font-sans text-sm tracking-widest uppercase font-bold hover:bg-cream transition-all duration-300 shadow-xl">
+                        <div className="pt-8 text-center flex justify-center">
+                             <a href="mailto:jambokellahouseroma@gmail.com" className="inline-block bg-gold text-charcoal px-10 py-4 font-sans text-sm tracking-widest uppercase font-bold hover:bg-cream transition-all duration-300 shadow-xl">
                                 Contattaci
                             </a>
                         </div>
@@ -922,7 +1011,8 @@ const LocationPage = ({ onOpenBooking }) => {
                     <div>
                         <h3 className="font-serif text-2xl mb-4 text-charcoal">Come Raggiungerci</h3>
                         <p className="leading-relaxed mb-4"><strong>In Treno:</strong> Dalla Stazione Trastevere il nostro B&B a Monteverde è facilmente raggiungibile con il tram 8 o il bus H. Da Termini con il bus H in 30 minuti</p>
-                        <p className="leading-relaxed"><strong>In Aereo:</strong> Dall'aeroporto di Fiumicino, il treno diretto ferma alla Stazione Trastevere (porta di Monteverde) in soli 26 minuti.</p>
+                        <p className="leading-relaxed mb-4"><strong>In Aereo:</strong> Dall'aeroporto di Fiumicino, il treno diretto ferma alla Stazione Trastevere (porta di Monteverde) in soli 26 minuti.</p>
+                        <p className="leading-relaxed"><strong>Con il nostro servizio:</strong> Su richiesta, offriamo un servizio di transfer in macchina dal vostro punto di arrivo a Roma direttamente fino all'appartamento.</p>
                     </div>
                 </div>
             </div>
