@@ -245,15 +245,28 @@ const Footer = ({ onOpenBooking }) => {
                                 <MapPin className="w-5 h-5 text-gold shrink-0 mt-1" />
                                 <span>Via N. Corsi, 4<br/>00152 Roma RM, Italia</span>
                             </a>
-                            <a href="tel:+393342044493" className="flex items-center gap-3 hover:text-gold transition-colors">
+                            <a href="tel:+39330455163" className="flex items-center gap-3 hover:text-gold transition-colors group">
                                 <Phone className="w-5 h-5 text-gold" />
-                                <span>(+39) 334 2044493</span>
+                                <span className="flex flex-col">
+                                    <span className="text-[10px] uppercase tracking-widest text-gold/60 font-bold mb-0.5">Italiano</span>
+                                    <span>(+39) 330 455163</span>
+                                </span>
                             </a>
-                            <a href="tel:+393349909559" className="flex items-center gap-3 hover:text-gold transition-colors">
+                            <a href="tel:+393342044493" className="flex items-center gap-3 hover:text-gold transition-colors group">
                                 <Phone className="w-5 h-5 text-gold" />
-                                <span>(+39) 334 9909559</span>
+                                <span className="flex flex-col">
+                                    <span className="text-[10px] uppercase tracking-widest text-gold/60 font-bold mb-0.5">English</span>
+                                    <span>(+39) 334 2044493</span>
+                                </span>
                             </a>
-                            <a href="mailto:jambokellahouseroma@gmail.com" className="flex items-center gap-3 hover:text-gold transition-colors">
+                            <a href="tel:+393399909559" className="flex items-center gap-3 hover:text-gold transition-colors group">
+                                <Phone className="w-5 h-5 text-gold" />
+                                <span className="flex flex-col">
+                                    <span className="text-[10px] uppercase tracking-widest text-gold/60 font-bold mb-0.5">Português</span>
+                                    <span>(+39) 339 9909559</span>
+                                </span>
+                            </a>
+                            <a href="mailto:jambokellahouseroma@gmail.com" className="flex items-center gap-3 hover:text-gold transition-colors mt-2">
                                 <Mail className="w-5 h-5 text-gold" />
                                 <span>jambokellahouseroma@gmail.com</span>
                             </a>
