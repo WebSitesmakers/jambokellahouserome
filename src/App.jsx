@@ -4,7 +4,7 @@ import { HashRouter as Router, Routes, Route, Link, useLocation } from 'react-ro
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Menu, X, MapPin, Instagram, Mail, Phone, ExternalLink } from 'lucide-react';
+import { Menu, X, MapPin, Instagram, Mail, Phone, ExternalLink, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 import logo from './assets/logo.png';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -105,6 +105,7 @@ const BookingModal = ({ isOpen, onClose }) => {
 
 const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
     const modalRef = useRef(null);
+    const [selectedIdx, setSelectedIdx] = useState(null);
 
     useEffect(() => {
         if (isOpen) {
@@ -113,13 +114,56 @@ const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
             gsap.fromTo(".modal-content", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.2, ease: "back.out(1.2)" });
         } else {
             document.body.style.overflow = 'auto';
+            setSelectedIdx(null);
         }
     }, [isOpen]);
+
+    // Handle Keyboard Navigation for Lightbox
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (selectedIdx === null) return;
+            if (e.key === 'ArrowRight') handleNext();
+            if (e.key === 'ArrowLeft') handlePrev();
+            if (e.key === 'Escape') setSelectedIdx(null);
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [selectedIdx]);
+
+    const handleNext = () => {
+        setSelectedIdx((prev) => (prev + 1) % images.length);
+    };
+
+    const handlePrev = () => {
+        setSelectedIdx((prev) => (prev - 1 + images.length) % images.length);
+    };
+
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+
+    const minSwipeDistance = 50;
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > minSwipeDistance;
+        const isRightSwipe = distance < -minSwipeDistance;
+        if (isLeftSwipe) handleNext();
+        if (isRightSwipe) handlePrev();
+    };
 
     if (!isOpen) return null;
 
     return (
         <div ref={modalRef} className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-charcoal/95 backdrop-blur-xl">
+            {/* Main Modal Close */}
             <button 
                 onClick={onClose}
                 className="absolute top-6 right-6 z-[110] text-cream hover:text-gold transition-colors p-2 bg-charcoal/50 rounded-full"
@@ -135,12 +179,19 @@ const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
                 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {images.map((img, idx) => (
-                        <div key={idx} className="gallery-item overflow-hidden rounded-xl aspect-square bg-neutral-200 shadow-sm transition-transform duration-500 hover:scale-[1.02]">
+                        <div 
+                            key={idx} 
+                            onClick={() => setSelectedIdx(idx)}
+                            className="gallery-item overflow-hidden rounded-xl aspect-square bg-neutral-200 shadow-sm transition-transform duration-500 hover:scale-[1.02] cursor-pointer group relative"
+                        >
                             <img 
                                 src={img} 
                                 alt={`${roomName} shot ${idx + 1}`} 
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
                             />
+                            <div className="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <Maximize2 className="text-white" size={24} />
+                            </div>
                         </div>
                     ))}
                     {images.length === 0 && (
@@ -156,9 +207,52 @@ const GalleryModal = ({ isOpen, onClose, images, roomName }) => {
                     </button>
                 </div>
             </div>
+
+            {/* LIGHTBOX OVERLAY */}
+            {selectedIdx !== null && (
+                <div 
+                    className="fixed inset-0 z-[300] bg-charcoal animate-fadeIn flex flex-col items-center justify-center p-4"
+                    onTouchStart={onTouchStart}
+                    onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
+                >
+                    <button 
+                        onClick={() => setSelectedIdx(null)}
+                        className="absolute top-6 right-6 text-cream/70 hover:text-white transition-colors p-3 bg-white/10 rounded-full z-[310]"
+                    >
+                        <X size={32} />
+                    </button>
+
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                        className="absolute left-4 md:left-8 text-cream/70 hover:text-white transition-all p-4 bg-white/5 hover:bg-white/10 rounded-full z-[310] hidden md:flex"
+                    >
+                        <ChevronLeft size={48} />
+                    </button>
+
+                    <button 
+                        onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                        className="absolute right-4 md:right-8 text-cream/70 hover:text-white transition-all p-4 bg-white/5 hover:bg-white/10 rounded-full z-[310] hidden md:flex"
+                    >
+                        <ChevronRight size={48} />
+                    </button>
+
+                    <div className="relative w-full h-full flex flex-col items-center justify-center" onClick={(e) => e.target === e.currentTarget && setSelectedIdx(null)}>
+                        <img 
+                            src={images[selectedIdx]} 
+                            alt={`Fullscreen ${roomName}`} 
+                            className="max-h-[85vh] max-w-[95vw] object-contain shadow-2xl animate-zoomIn pointer-events-none"
+                        />
+                        <div className="mt-6 text-cream/60 font-sans tracking-widest uppercase text-xs">
+                            {roomName} — {selectedIdx + 1} / {images.length}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
+
 
 const Navbar = ({ onOpenBooking }) => {
     const [isOpen, setIsOpen] = React.useState(false);
@@ -193,7 +287,7 @@ const Navbar = ({ onOpenBooking }) => {
                                 <span className="absolute -bottom-2 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full"></span>
                             </Link>
                         ))}
-                        <button onClick={onOpenBooking} className="btn-magnetic px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 ml-4 font-bold">
+                        <button onClick={onOpenBooking} className="px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-white transition-all duration-300 ml-4 font-bold">
                             Ottieni maggiori informazioni
                         </button>
                     </div>
@@ -282,7 +376,7 @@ const Footer = ({ onOpenBooking }) => {
                             <Instagram className="w-5 h-5" />
                             <span>@JambokellaHouserome</span>
                         </a>
-                        <button onClick={onOpenBooking} className="btn-magnetic px-8 py-3 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-cream hover:text-charcoal transition-colors">
+                        <button onClick={onOpenBooking} className="px-8 py-3 bg-gold text-charcoal tracking-widest uppercase font-sans text-xs font-bold hover:bg-cream hover:text-charcoal transition-colors">
                             Ottieni maggiori informazioni
                         </button>
                     </div>
@@ -356,19 +450,6 @@ const Home = ({ onOpenBooking }) => {
                 delay: 0.8
             });
 
-            // Magnetic Button Effect simulation
-            const buttons = document.querySelectorAll('.btn-magnetic');
-            buttons.forEach(btn => {
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
-                    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
-                    gsap.to(btn, { x, y, duration: 0.3, ease: "power2.out" });
-                });
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
-                });
-            });
 
             gsap.to(".hero-image-container", {
                 scrollTrigger: {
@@ -500,7 +581,7 @@ const Home = ({ onOpenBooking }) => {
                     </h1>
                     
                     <div className="reveal-up mt-4 md:mt-8 flex flex-col items-center gap-3">
-                        <button onClick={onOpenBooking} className="btn-magnetic px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
+                        <button onClick={onOpenBooking} className="px-8 md:px-10 py-3 md:py-4 bg-gold text-charcoal font-sans text-xs md:text-sm tracking-widest uppercase font-bold hover:bg-cream hover:scale-105 transition-all duration-300 shadow-xl inline-block">
                             Ottieni maggiori informazioni
                         </button>
                         <p className="text-cream/80 text-[10px] md:text-xs font-sans tracking-[0.15em] uppercase drop-shadow-md pb-1 border-b border-cream/20">
@@ -699,7 +780,7 @@ const Home = ({ onOpenBooking }) => {
                         <p className="reveal-up font-sans font-light text-cream/70 text-lg leading-relaxed mb-10 max-w-lg">
                             La zona è strategica: il tram 8 vi porta direttamente nel centro storico in pochi minuti. La vicinanza con la stazione Trastevere è ideale per chi arriva dall'aeroporto. Avrete tutto a portata di mano: supermercati, ristoranti tipici e la splendida Villa Doria Pamphili per i vostri momenti di relax nel verde.
                         </p>
-                        <Link to="/location" className="btn-magnetic reveal-up inline-flex items-center gap-3 border border-gold px-8 py-3 text-gold hover:bg-gold hover:text-charcoal transition-colors tracking-widest uppercase font-sans text-xs font-bold">
+                        <Link to="/location" className="reveal-up inline-flex items-center gap-3 border border-gold px-8 py-3 text-gold hover:bg-gold hover:text-charcoal transition-colors tracking-widest uppercase font-sans text-xs font-bold">
                             Esplora la mappa
                         </Link>
                     </div>
@@ -722,9 +803,9 @@ const Home = ({ onOpenBooking }) => {
 
 // Dynamically import all images from src/assets
 const allAssets = import.meta.glob('./assets/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
-const galleryImages = Object.values(allAssets)
-    .map(mod => mod.default || mod)
-    .filter(img => typeof img === 'string' && !img.includes('logo.png'));
+const galleryImages = Object.entries(allAssets)
+    .filter(([path]) => !path.toLowerCase().includes('logo.png'))
+    .map(([_, mod]) => mod.default || mod);
 
 // Individual Room Assets
 const m1Assets = import.meta.glob('./assets/Camera matrimoniale 1/*.{jpg,jpeg,png,JPG,JPEG,PNG}', { eager: true });
@@ -817,12 +898,19 @@ const CamerePage = ({ onOpenBooking }) => {
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {galleryImages.map((img, idx) => (
-                            <div key={idx} className="gallery-item overflow-hidden aspect-square group shadow-md hover:shadow-xl transition-shadow duration-500">
+                            <div 
+                                key={idx} 
+                                onClick={() => { setActiveGallery({ name: 'Jambokella House', images: galleryImages }); setIsGalleryOpen(true); }}
+                                className="gallery-item overflow-hidden aspect-square group shadow-md hover:shadow-xl transition-shadow duration-500 cursor-pointer"
+                            >
                                 <img 
                                     src={img} 
                                     alt={`Gallery photo ${idx + 1}`} 
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 grayscale-[20%] hover:grayscale-0" 
                                 />
+                                <div className="absolute inset-0 bg-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <Maximize2 className="text-white" size={24} />
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -996,7 +1084,15 @@ const LocationPage = ({ onOpenBooking }) => {
             </Helmet>
             <div className="container mx-auto px-6 lg:px-12 page-content max-w-4xl mx-auto">
                 <span className="font-sans tracking-widest uppercase text-gold text-sm font-bold mb-4 block text-center">La Posizione</span>
-                <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-12 text-center text-balance">Al centro della Storia.</h1>
+                <h1 className="text-5xl md:text-6xl font-serif text-charcoal mb-8 text-center text-balance">Al centro della Storia.</h1>
+                <div className="max-w-3xl mx-auto text-center mb-12 space-y-4">
+                    <p className="font-sans font-light text-charcoal/70 text-lg leading-relaxed">
+                        Questo luminoso ed elegante appartamento situato nel cuore di Monteverde è stato recentemente ristrutturato e progettato con arredi moderni e nuovissimi per rendere il vostro soggiorno confortevole, dotato di tutti i comfort compreso Wi-Fi.
+                    </p>
+                    <p className="font-sans font-light text-charcoal/70 text-lg leading-relaxed">
+                        Ideale per coppie e famiglie, l'appartamento può accogliere comodamente cinque persone con la possibilità di richiedere un letto aggiuntivo e/o culla.
+                    </p>
+                </div>
                 <div className="overflow-hidden h-[400px] mb-12 shadow-2xl relative group">
                     <img src={getImg("location.jpg")} alt="Mappa Roma" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 object-center" />
                     <div className="absolute inset-0 bg-charcoal/20 flex items-center justify-center">
